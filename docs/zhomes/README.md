@@ -4,20 +4,6 @@ description: >-
   home plugins don't have
 cover: ../.gitbook/assets/zHomes Banner 2.png
 coverY: -16.70769230769231
-layout:
-  cover:
-    visible: true
-    size: full
-  title:
-    visible: true
-  description:
-    visible: true
-  tableOfContents:
-    visible: true
-  outline:
-    visible: true
-  pagination:
-    visible: true
 ---
 
 # zHomes
