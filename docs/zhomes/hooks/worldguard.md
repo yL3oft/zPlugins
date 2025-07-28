@@ -10,4 +10,5 @@ description: List of all WorldGuard integrations to the plugin
 
 ## Custom Flags
 
-<table><thead><tr><th width="196">Flag</th><th width="342">Description</th><th>Type (Possible Values)</th></tr></thead><tbody><tr><td>use-homes</td><td>Manage if a player will be able to use homes system in a region</td><td>StateFlag (Deny, Allow)</td></tr></tbody></table>
+<table><thead><tr><th width="195">Flag</th><th width="359">Description</th><th width="126">Type (Possible Values)</th><th width="68">Default</th></tr></thead><tbody><tr><td>use-homes</td><td>Manage if a player will be able to use homes system in a region</td><td>StateFlag (Deny, Allow)</td><td>Allow</td></tr><tr><td>set-homes</td><td>Manage if a player will be able to set homes in a region</td><td>StateFlag (Deny, Allow)</td><td>Allow</td></tr><tr><td>bypass-home-warmup</td><td>Manage if the /home warmup time should happen in a region</td><td>StateFlag (Deny, Allow)</td><td>Deny</td></tr><tr><td>bypass-home-cost</td><td>Manage if command costs should be enabled in a region</td><td>StateFlag (Deny, Allow)</td><td>Deny</td></tr></tbody></table>
+

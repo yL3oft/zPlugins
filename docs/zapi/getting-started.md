@@ -43,7 +43,7 @@ The dependency is published on [Maven Central](https://mvnrepository.com/repos/c
 </strong>    &#x3C;dependency>
         &#x3C;groupId>me.yleoft&#x3C;/groupId>
         &#x3C;artifactId>zAPI&#x3C;/artifactId>
-        &#x3C;version>1.4.0&#x3C;/version>
+        &#x3C;version>1.4.1&#x3C;/version>
         &#x3C;scope>compile&#x3C;/scope>
     &#x3C;/dependency>
 &#x3C;/dependencies>
@@ -61,7 +61,7 @@ plugins {
 }
 
 dependencies {
-    implementation("me.yleoft:zAPI:1.4.0")
+    implementation("me.yleoft:zAPI:1.4.1")
 }
 
 shadowJar {
