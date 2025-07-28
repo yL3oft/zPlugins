@@ -38,6 +38,10 @@ Called when **/homes** command is executed by a player
 
 Called when **/zhomes** command is executed by a playe
 
+## RenameHomeEvent
+
+Called when **/home rename** command is fully executed by a player
+
 ## TeleportToHomeEvent
 
 Called when a player is teleported to a home

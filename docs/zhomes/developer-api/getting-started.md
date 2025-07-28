@@ -17,7 +17,7 @@ The dependency is published on [Maven Central](https://mvnrepository.com/repos/c
     <dependency>
         <groupId>me.yleoft</groupId>
         <artifactId>zHomes</artifactId>
-        <version>2.0.5</version>
+        <version>2.0.6</version>
         <scope>provided</scope>
     </dependency>
 </dependencies>
@@ -27,6 +27,6 @@ The dependency is published on [Maven Central](https://mvnrepository.com/repos/c
 
 ```gradle
 dependencies {
-    compileOnly("me.yleoft:zHomes:2.0.5")
+    compileOnly("me.yleoft:zHomes:2.0.6")
 }
 ```
