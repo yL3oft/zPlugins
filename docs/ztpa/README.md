@@ -1,12 +1,10 @@
 ---
-description: >-
-  A very complex homes plugins, including alot of features that convencional
-  home plugins don't have
-cover: ../.gitbook/assets/zHomes Banner 2.png
-coverY: -16.70769230769231
+description: A pretty simple yet complete tpa system, all customizable and easy to use
+cover: ../.gitbook/assets/zTPA Banner 2.png
+coverY: 0
 ---
 
-# zHomes
+# zTPA
 
 {% hint style="warning" %}
 ‎This wiki is made to explain the plugin as of version 2.0.1. If any of the config here is missing on your plugin, make sure your plugin is up-to-date, the plugin says when its up-to-date on its starts.
@@ -26,10 +24,10 @@ coverY: -16.70769230769231
 
 ## Pages <a href="#pages" id="pages"></a>
 
-* **Mothinth:** [https://modrinth.com/plugin/zhomes](https://modrinth.com/plugin/zhomes)
-* **Hangar:** [https://hangar.papermc.io/yLeoft/zHomes](https://hangar.papermc.io/yLeoft/zHomes)
-* **SpigotMC:** [https://www.spigotmc.org/resources/zhomes.123141/](https://www.spigotmc.org/resources/zhomes.123141/)
-* **bStats:** [https://bstats.org/plugin/bukkit/zHomes/25021](https://bstats.org/plugin/bukkit/zHomes/25021)
+* **Mothinth:** [https://modrinth.com/plugin/ztpa](https://modrinth.com/plugin/ztpa)
+* **Hangar:** [https://hangar.papermc.io/yLeoft/zTPA](https://hangar.papermc.io/yLeoft/zTPA)
+* **SpigotMC:** [https://www.spigotmc.org/resources/ztpa.123141/](https://www.spigotmc.org/resources/ztpa.123141/)
+* **bStats:** [https://bstats.org/plugin/bukkit/zTPA/26707](https://bstats.org/plugin/bukkit/zTPA/26707)
 
 ***
 
@@ -38,4 +36,4 @@ coverY: -16.70769230769231
 * **Discord:** [https://discord.gg/yCdhVDgn4K](https://discord.gg/yCdhVDgn4K)
 * **Email:** `maehara.leonardo@gmail.com`
 
-<figure><img src="https://bstats.org/signatures/bukkit/zHomes.svg" alt=""><figcaption></figcaption></figure>
+<figure><img src="https://bstats.org/signatures/bukkit/zTPA.svg" alt=""><figcaption></figcaption></figure>

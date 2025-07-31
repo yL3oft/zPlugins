@@ -10,10 +10,6 @@ A **hook** is a way for the plugin to work together with other plugins. It lets 
 
 ## All Plugin Hooks:
 
-{% content-ref url="placeholderapi.md" %}
-[placeholderapi.md](placeholderapi.md)
-{% endcontent-ref %}
-
 {% content-ref url="worldguard.md" %}
 [worldguard.md](worldguard.md)
 {% endcontent-ref %}
