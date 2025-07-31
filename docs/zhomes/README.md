@@ -9,7 +9,7 @@ coverY: -16.70769230769231
 # zHomes
 
 {% hint style="warning" %}
-‎This wiki is made to explain the plugin as of version 2.0.1. If any of the config here is missing on your plugin, make sure your plugin is up-to-date, the plugin says when its up-to-date on its starts.
+‎This wiki is made to explain the plugin as of version 2.1.1. If any of the config here is missing on your plugin, make sure your plugin is up-to-date, the plugin says when its up-to-date on its starts.
 {% endhint %}
 
 ## Requirements

@@ -13,6 +13,7 @@
     * [/zhomes converter \<type>](zhomes/commands-and-permissions/zhomes-converter-less-than-type-greater-than.md)
   * [Hooks](zhomes/hooks/README.md)
     * [PlaceholderAPI](zhomes/hooks/placeholderapi.md)
+    * [GriefPrevention](zhomes/hooks/griefprevention.md)
     * [WorldGuard](zhomes/hooks/worldguard.md)
     * [Vault](zhomes/hooks/vault.md)
   * [Plugin Files](zhomes/plugin-files/README.md)
