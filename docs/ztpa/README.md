@@ -16,11 +16,10 @@ coverY: 0
 * **Version 1.8 - 1.21.8 \[Spigot, Paper, Purpur, Pufferfish]**
 * **Version 1.20 - 1.21 \[Folia]**
 
-| Soft Depend                                                               | Use                                                                |
-| ------------------------------------------------------------------------- | ------------------------------------------------------------------ |
-| [PlaceholderAPI](https://www.spigotmc.org/resources/placeholderapi.6245/) | Register custom placeholders for the plugin and parse placeholders |
-| [WorldGuard](https://modrinth.com/plugin/worldguard)                      | Register a custom flag to manage if the player can use homes       |
-| [Vault](https://www.spigotmc.org/resources/vault.34315/)                  | Use to manage the server economy to plugin uses                    |
+| Soft Depend                                              | Use                                                          |
+| -------------------------------------------------------- | ------------------------------------------------------------ |
+| [WorldGuard](https://modrinth.com/plugin/worldguard)     | Register a custom flag to manage if the player can use homes |
+| [Vault](https://www.spigotmc.org/resources/vault.34315/) | Use to manage the server economy to plugin uses              |
 
 ## Pages <a href="#pages" id="pages"></a>
 

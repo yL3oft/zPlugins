@@ -6,16 +6,16 @@ description: All the documentation required to start using the API provided by z
 
 ## JavaDocs
 
-{% content-ref url="../../zhomes/developer-api/javadocs.md" %}
-[javadocs.md](../../zhomes/developer-api/javadocs.md)
+{% content-ref url="javadocs.md" %}
+[javadocs.md](javadocs.md)
 {% endcontent-ref %}
 
 ## Get right into it:
 
-{% content-ref url="../../zhomes/developer-api/getting-started.md" %}
-[getting-started.md](../../zhomes/developer-api/getting-started.md)
+{% content-ref url="getting-started.md" %}
+[getting-started.md](getting-started.md)
 {% endcontent-ref %}
 
-{% content-ref url="../../zhomes/developer-api/events.md" %}
-[events.md](../../zhomes/developer-api/events.md)
+{% content-ref url="events.md" %}
+[events.md](events.md)
 {% endcontent-ref %}
