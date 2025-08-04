@@ -25,7 +25,7 @@ coverY: 0
 
 * **Mothinth:** [https://modrinth.com/plugin/ztpa](https://modrinth.com/plugin/ztpa)
 * **Hangar:** [https://hangar.papermc.io/yLeoft/zTPA](https://hangar.papermc.io/yLeoft/zTPA)
-* **SpigotMC:** [https://www.spigotmc.org/resources/ztpa.123141/](https://www.spigotmc.org/resources/ztpa.123141/)
+* **SpigotMC:** [https://www.spigotmc.org/resources/ztpa.127637/](https://www.spigotmc.org/resources/ztpa.127637/)
 * **bStats:** [https://bstats.org/plugin/bukkit/zTPA/26707](https://bstats.org/plugin/bukkit/zTPA/26707)
 
 ***
