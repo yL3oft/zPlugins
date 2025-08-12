@@ -16,8 +16,8 @@ The dependency is published on [Maven Central](https://mvnrepository.com/repos/c
 <dependencies>
     <dependency>
         <groupId>me.yleoft</groupId>
-        <artifactId>zTpa</artifactId>
-        <version>1.0.0</version>
+        <artifactId>zTPA</artifactId>
+        <version>1.0.1</version>
         <scope>provided</scope>
     </dependency>
 </dependencies>
@@ -27,6 +27,6 @@ The dependency is published on [Maven Central](https://mvnrepository.com/repos/c
 
 ```gradle
 dependencies {
-    compileOnly("me.yleoft:zTpa:1.0.0")
+    compileOnly("me.yleoft:zTPA:1.0.1")
 }
 ```

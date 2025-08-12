@@ -10,10 +10,6 @@ description: >-
 You can see more detailed documentation about each holder and manager in the [JavaDocs](../../zhomes/developer-api/javadocs.md).
 {% endhint %}
 
-## PreExecuteSethomeCommandEvent
-
-Called when **/sethome** command is executed by a player
-
 ## PreExecuteDelhomeCommandEvent
 
 Called when **/delhome** command is executed by a player\\

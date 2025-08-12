@@ -10,7 +10,3 @@ description: List of all WorldGuard integrations to the plugin
 
 ## Custom Flags
 
-{% hint style="warning" %}
-Worldguard Flags are not implemented yet
-{% endhint %}
-
