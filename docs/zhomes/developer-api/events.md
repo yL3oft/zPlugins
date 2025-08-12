@@ -16,7 +16,7 @@ Called when **/sethome** command is executed by a player
 
 ## PreExecuteDelhomeCommandEvent
 
-Called when **/delhome** command is executed by a player\\
+Called when **/delhome** command is executed by a player
 
 ## PreExecuteHomeCommandEvent
 
@@ -36,7 +36,7 @@ Called when **/homes** command is executed by a player
 
 ## ExecuteMainCommandEvent
 
-Called when **/zhomes** command is executed by a playe
+Called when **/zhomes (Main command)** is executed by a player
 
 ## RenameHomeEvent
 

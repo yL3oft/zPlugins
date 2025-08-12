@@ -10,37 +10,25 @@ description: >-
 You can see more detailed documentation about each holder and manager in the [JavaDocs](../../zhomes/developer-api/javadocs.md).
 {% endhint %}
 
-## PreExecuteDelhomeCommandEvent
+## SendTeleportRequestEvent
 
-Called when **/delhome** command is executed by a player\\
+Called when a player send a teleport request
 
-## PreExecuteHomeCommandEvent
+## AcceptTeleportRequestEvent
 
-Called when **/home** command is executed by a player
+Called when a player accept a teleport request
 
-## ExecuteSethomeCommandEvent
+## DenyTeleportRequestEvent
 
-Called when **/sethome (Home)** command is executed by a player
+Called when a player deny a teleport request
 
-## ExecuteDelhomeCommandEvent
+## CancelTeleportRequestEvent
 
-Called when **/delhome (Home)** command is executed by a player
-
-## ExecuteHomesCommandEvent
-
-Called when **/homes** command is executed by a player
+Called when a player cancel a teleport request
 
 ## ExecuteMainCommandEvent
 
-Called when **/zhomes** command is executed by a playe
-
-## RenameHomeEvent
-
-Called when **/home rename** command is fully executed by a player
-
-## TeleportToHomeEvent
-
-Called when a player is teleported to a home
+Called when **/ztpa (Main command)** is executed by a player
 
 ## Example
 
@@ -48,4 +36,4 @@ Example of a class listening to the PreExecuteSethomeCommandEvent and ExecuteSet
 
 On ExecuteSethomeCommandEvent it also sets the home to test if it's not the <kbd>test</kbd> home
 
-{% @github-files/github-code-block url="https://github.com/yL3oft/zHomes/blob/master/src/main/java/com/zhomes/api/examples/ExampleEvent.java" %}
+{% @github-files/github-code-block url="https://github.com/yL3oft/zTPA/blob/master/src/main/java/com/zTPA/api/examples/ExampleEvent.java" %}
