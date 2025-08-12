@@ -32,8 +32,6 @@ Called when **/ztpa (Main command)** is executed by a player
 
 ## Example
 
-Example of a class listening to the PreExecuteSethomeCommandEvent and ExecuteSethomeCommandEvent and canceling it if the player's name is <kbd>yLeoft</kbd> (Or if the home's name is <kbd>test</kbd>)
-
-On ExecuteSethomeCommandEvent it also sets the home to test if it's not the <kbd>test</kbd> home
+Example of a class listening to the AcceptTeleportRequestEvent canceling it the sender of the teleport request is "yLeoft2" and who accept is "yLeoft"
 
 {% @github-files/github-code-block url="https://github.com/yL3oft/zTPA/blob/master/src/main/java/com/zTPA/api/examples/ExampleEvent.java" %}
