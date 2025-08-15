@@ -1,10 +1,10 @@
 ---
-description: Get started using the zHomes API.
+description: Get started using the zTPA API.
 ---
 
 # Getting Started
 
-## Declare zHomes dependency in your build files
+## Declare zTPA dependency in your build files
 
 {% hint style="info" %}
 The dependency is published on [Maven Central](https://mvnrepository.com/repos/central), meaning you don't need to parse the repository.
@@ -17,7 +17,7 @@ The dependency is published on [Maven Central](https://mvnrepository.com/repos/c
     <dependency>
         <groupId>me.yleoft</groupId>
         <artifactId>zTPA</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.2</version>
         <scope>provided</scope>
     </dependency>
 </dependencies>
@@ -27,6 +27,6 @@ The dependency is published on [Maven Central](https://mvnrepository.com/repos/c
 
 ```gradle
 dependencies {
-    compileOnly("me.yleoft:zTPA:1.0.1")
+    compileOnly("me.yleoft:zTPA:1.0.2")
 }
 ```

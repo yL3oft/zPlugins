@@ -35,7 +35,7 @@
     * [Getting Started](zhomes/developer-api/getting-started.md)
     * [Events](zhomes/developer-api/events.md)
     * [JavaDocs](zhomes/developer-api/javadocs.md)
-* [zTPAz](ztpa/README.md)
+* [zTPA](ztpa/README.md)
   * [Commands & Permissions](ztpa/commands-and-permissions/README.md)
     * [/ztpa reload \<type>](ztpa/commands-and-permissions/ztpa-reload-less-than-type-greater-than.md)
   * [Hooks](ztpa/hooks/README.md)
