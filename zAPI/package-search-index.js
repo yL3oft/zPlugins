@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"me.yleoft.zAPI"},{"l":"me.yleoft.zAPI.folia"},{"l":"me.yleoft.zAPI.handlers"},{"l":"me.yleoft.zAPI.inventory"},{"l":"me.yleoft.zAPI.listeners"},{"l":"me.yleoft.zAPI.managers"},{"l":"me.yleoft.zAPI.mutable"},{"l":"me.yleoft.zAPI.utils"}];updateSearchResults();
