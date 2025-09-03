@@ -1,0 +1,9 @@
+com.zTPA.api.event.player
+com.zTPA.api.examples
+me.yleoft.zTPA
+me.yleoft.zTPA.commands
+me.yleoft.zTPA.constructors
+me.yleoft.zTPA.hooks
+me.yleoft.zTPA.listeners
+me.yleoft.zTPA.tabcompleters
+me.yleoft.zTPA.utils

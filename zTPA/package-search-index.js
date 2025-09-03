@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.zTPA.api.event.player"},{"l":"com.zTPA.api.examples"},{"l":"me.yleoft.zTPA"},{"l":"me.yleoft.zTPA.commands"},{"l":"me.yleoft.zTPA.constructors"},{"l":"me.yleoft.zTPA.hooks"},{"l":"me.yleoft.zTPA.listeners"},{"l":"me.yleoft.zTPA.tabcompleters"},{"l":"me.yleoft.zTPA.utils"}];updateSearchResults();
