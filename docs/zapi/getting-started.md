@@ -38,12 +38,19 @@ The dependency is published on [Maven Central](https://mvnrepository.com/repos/c
         &#x3C;/plugin>
     &#x3C;/plugins>
 &#x3C;/build>
+
+&#x3C;repositories>
+    &#x3C;repository>
+        &#x3C;id>yl3oft-repo&#x3C;/id>
+        &#x3C;url>https://repo.codemc.io/repository/yl3oft/&#x3C;/url>
+    &#x3C;/repository>
+&#x3C;/repositories>
 <strong>
 </strong><strong>&#x3C;dependencies>
 </strong>    &#x3C;dependency>
         &#x3C;groupId>me.yleoft&#x3C;/groupId>
         &#x3C;artifactId>zAPI&#x3C;/artifactId>
-        &#x3C;version>1.4.6&#x3C;/version>
+        &#x3C;version>1.4.8&#x3C;/version>
         &#x3C;scope>compile&#x3C;/scope>
     &#x3C;/dependency>
 &#x3C;/dependencies>
@@ -60,8 +67,12 @@ plugins {
     id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
+repositories {
+    maven("https://repo.codemc.io/repository/yl3oft/")
+}
+
 dependencies {
-    implementation("me.yleoft:zAPI:1.4.6")
+    implementation("me.yleoft:zAPI:1.4.8")
 }
 
 shadowJar {
