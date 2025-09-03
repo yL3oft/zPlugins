@@ -17,10 +17,10 @@
 -docencoding
 'UTF-8'
 -doctitle
-'zAPI 1.4.8-SNAPSHOT API'
+'zAPI 1.4.8 API'
 -linkoffline
 'https://docs.oracle.com/javase/8/docs/api' '/home/runner/work/zAPI/zAPI/target/javadoc-bundle-options'
 -use
 -version
 -windowtitle
-'zAPI 1.4.8-SNAPSHOT API'
+'zAPI 1.4.8 API'
