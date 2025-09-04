@@ -13,3 +13,7 @@ zPlugins is an organization of minecraft plugins made by [**yLeoft**](https://gi
 ## Discord
 
 Couldn't find what you're searching for in the Wiki? Or want to do a plugin request? Get support from our [**Discord**](https://discord.gg/yCdhVDgn4K)**.**
+
+## Javadocs
+
+Click here to acess the javadocs: [zPlugins Javadocs](https://javadocs.yleoft.me/)
