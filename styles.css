@@ -1,0 +1,300 @@
+/* ----------------- General ----------------- */
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #1e1e1e, #252525);
+    color: #eee;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px;
+    transition: background 0.3s, color 0.3s;
+}
+
+body.light {
+    background: linear-gradient(135deg, #f4f4f4, #eaeaea);
+    color: #333;
+}
+
+/* ----------------- Header ----------------- */
+h1 {
+    margin: 20px 0 30px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 img {
+    height: 64px;
+    margin-bottom: 10px;
+    transition: filter 0.3s;
+}
+
+/* ----------------- Dark Mode Button ----------------- */
+.dark-mode-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #fff;
+    transition: color 0.3s;
+    z-index: 1000;
+}
+
+.dark-mode-toggle:hover {
+    transform: scale(1.2);
+    color: #4ea3ff;
+}
+
+body.light .dark-mode-toggle {
+    color: #333;
+}
+
+/* ----------------- Search ----------------- */
+.search-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 30px;
+}
+
+/* Base search input (dark) */
+.search-input {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid #555;
+    background: #2c2c2c;
+    color: #eee;
+    width: 100%;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+/* Light mode overrides */
+body.light .search-input {
+    background: #fff;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+.search-input::placeholder {
+    color: #aaa;
+}
+
+body.light .search-input::placeholder {
+    color: #888;
+}
+
+.search-input:focus {
+    outline: none;
+    transform: scale(1.03);
+    border-color: #4ea3ff;
+    box-shadow: 0 0 15px rgba(78,163,255,0.5);
+}
+
+.search-input:focus::placeholder {
+    color: #4ea3ff;
+}
+
+/* ----------------- Cards ----------------- */
+.container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 100%;
+    max-width: 700px;
+    justify-items: center;
+}
+
+.card {
+    border-radius: 12px;
+    width: 100%;
+    max-width: 330px;
+    cursor: pointer;
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+.card-inner {
+    background: linear-gradient(145deg, #2c2c2c, #313131);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s;
+}
+
+.card:hover .card-inner {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.card.hidden {
+    display: none;
+}
+
+/* --- Card Animation --- */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.card {
+    opacity: 0; /* start hidden */
+    transform: translateY(20px);
+    transition: transform 0.3s cubic-bezier(0.25, 1.25, 0.5, 1),
+                box-shadow 0.3s ease,
+                background 0.3s,
+                opacity 0.3s;
+}
+
+.card.show {
+    animation: fadeInUp 0.5s forwards;
+    transition-delay: 0.1s;
+}
+
+/* --- Link Hover Effect --- */
+.card-inner a {
+    position: relative;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.card-inner a::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(78, 163, 255, 0.9);
+    color: #fff;
+    padding: 5px 8px;
+    border-radius: 6px;
+    white-space: nowrap;
+    font-size: 12px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s, transform 0.3s;
+    z-index: 10;
+}
+
+.card-inner a::before {
+    content: '';
+    position: absolute;
+    bottom: 115%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: rgba(78, 163, 255, 0.9) transparent transparent transparent;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+/* Show tooltip on hover */
+.card-inner a:hover::after,
+.card-inner a:hover::before {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-5px);
+}
+
+body.light .card-inner a::after {
+    background-color: #0077cc;
+}
+
+/* Fade-in Animation */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Highlight for search */
+mark {
+    background-color: #4ea3ff;
+    color: #fff;
+    padding: 0 1px;
+    border-radius: 3px;
+    box-shadow: 0 0 4px rgba(78,163,255,0.5);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.light mark {
+    background-color: #0077cc;
+}
+
+body.light .card-inner {
+    background: linear-gradient(145deg, #fff, #f9f9f9);
+}
+
+/* ----------------- Links ----------------- */
+a {
+    text-decoration: none;
+    color: #4ea3ff;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #1e90ff;
+}
+
+body.light a {
+    color: #0077cc;
+}
+
+body.light a:hover {
+    color: #005fa3;
+}
+
+/* ----------------- Skeleton ----------------- */
+.skeleton {
+    background: linear-gradient(90deg, #2c2c2c 25%, #3a3a3a 50%, #2c2c2c 75%);
+    background-size: 200% 100%;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 330px;
+    height: 60px;
+    margin: 10px 0;
+    animation: pulse 1.5s infinite;
+}
+
+body.light .skeleton {
+    background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+}
+
+@keyframes pulse {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* ----------------- Footer ----------------- */
+footer {
+    margin-top: 40px;
+    color: #aaa;
+    transition: color 0.3s;
+}
+
+footer a {
+    position: relative;
+}
+
+footer a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: #4ea3ff;
+    transition: width 0.3s ease;
+}
+
+footer a:hover::after {
+    width: 100%;
+}
+
+body.light footer {
+    color: #777;
+}

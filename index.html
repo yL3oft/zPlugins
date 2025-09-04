@@ -3,61 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>zPlugins Javadocs</title>
-    <link rel="icon" type="image/png" href="logo.png">
-    <style>
-        body {
-          font-family: Arial, sans-serif;
-          background: #f4f4f4;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          padding: 50px;
-        }
-        h1 {
-          margin: 20px 0 30px 0;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
-        h1 img {
-          height: 64px; /* adjust as needed */
-          margin-bottom: 10px;
-        }
-        .card {
-          background: white;
-          border-radius: 12px;
-          box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-          padding: 20px;
-          margin: 10px;
-          width: 300px;
-          text-align: center;
-          transition: 0.2s;
-        }
-        .card:hover {
-          transform: scale(1.05);
-        }
-        a {
-          text-decoration: none;
-          color: #0077cc;
-          font-weight: bold;
-        }
-    </style>
+    <link rel="icon" type="image/png" href="sources/global/logo.png">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<button class="dark-mode-toggle" id="toggleBtn">🌙</button>
+
 <h1>
-    <img src="banner.png" alt="Banner">
+    <img src="sources/darkmode/banner.png" alt="Banner" id="banner">
     Project Javadocs
 </h1>
 
-<div class="card">
-    <a href="./zAPI/">zAPI Javadoc</a>
+<div class="search-wrapper">
+    <input type="text" id="searchBox" placeholder="Search projects..." class="search-input">
 </div>
-<div class="card">
-    <a href="./zHomes/">zHomes Javadoc</a>
-</div>
-<div class="card">
-    <a href="./zTPA/">zTPA Javadoc</a>
-</div>
-<!-- Add more projects here -->
+
+<div class="container" id="projectsContainer"></div>
+
+<footer>
+    © <span id="year"></span> zPlugins | <a href="https://github.com/yl3oft" target="_blank">GitHub</a>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
