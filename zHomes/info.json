@@ -1,0 +1,12 @@
+{
+  "name": "zHomes",
+  "description": "Your new favorite homes plugin! (Maybe?)",
+  "url": "https://github.com/yL3oft/zHomes",
+  "jenkins": "https://ci.codemc.io/job/yL3oft/job/zHomes/",
+  "wiki": "https://docs.yleoft.me/zhomes",
+  "modrinth": "https://modrinth.com/plugin/zhomes",
+  "spigot": "https://www.spigotmc.org/resources/zhomes.123141/",
+  "hangar": "https://hangar.papermc.io/yLeoft/zHomes",
+  "bstats-id": 25021,
+  "modrinth-id": "veAp6a0M"
+}
