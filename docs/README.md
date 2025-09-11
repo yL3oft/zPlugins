@@ -10,6 +10,10 @@ description: >-
 
 zPlugins is an organization of minecraft plugins made by [**yLeoft**](https://github.com/yL3oft)**.**
 
+## Website
+
+View our website for information about our projects: [https://zplugins.yleoft.me](https://zplugins.yleoft.me/)
+
 ## Discord
 
 Couldn't find what you're searching for in the Wiki? Or want to do a plugin request? Get support from our [**Discord**](https://discord.gg/yCdhVDgn4K)**.**

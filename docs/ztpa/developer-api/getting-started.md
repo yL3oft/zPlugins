@@ -6,27 +6,33 @@ description: Get started using the zTPA API.
 
 ## Declare zTPA dependency in your build files
 
-{% hint style="info" %}
-The dependency is published on [Maven Central](https://mvnrepository.com/repos/central), meaning you don't need to parse the repository.
-{% endhint %}
-
 ### Maven
 
-```xml
-<dependencies>
-    <dependency>
-        <groupId>me.yleoft</groupId>
-        <artifactId>zTPA</artifactId>
-        <version>1.0.2</version>
-        <scope>provided</scope>
-    </dependency>
-</dependencies>
-```
+<pre class="language-xml"><code class="lang-xml">&#x3C;repositories>
+    &#x3C;repository>
+        &#x3C;id>yl3oft-repo&#x3C;/id>
+        &#x3C;url>https://repo.codemc.io/repository/yl3oft/&#x3C;/url>
+    &#x3C;/repository>
+&#x3C;/repositories>
+<strong>
+</strong><strong>&#x3C;dependencies>
+</strong>    &#x3C;dependency>
+        &#x3C;groupId>me.yleoft&#x3C;/groupId>
+        &#x3C;artifactId>zTPA&#x3C;/artifactId>
+        &#x3C;version>1.0.3&#x3C;/version>
+        &#x3C;scope>provided&#x3C;/scope>
+    &#x3C;/dependency>
+&#x3C;/dependencies>
+</code></pre>
 
 ### Gradle
 
 ```gradle
+repositories {
+    maven("https://repo.codemc.io/repository/yl3oft/")
+}
+
 dependencies {
-    compileOnly("me.yleoft:zTPA:1.0.2")
+    compileOnly("me.yleoft:zTPA:1.0.3")
 }
 ```

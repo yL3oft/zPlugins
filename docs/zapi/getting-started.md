@@ -6,10 +6,6 @@ description: Get started using the zAPI API.
 
 ## Declare zAPI dependency in your build files
 
-{% hint style="info" %}
-The dependency is published on [Maven Central](https://mvnrepository.com/repos/central), meaning you don't need to parse the repository.
-{% endhint %}
-
 ### Maven
 
 <pre class="language-xml"><code class="lang-xml">&#x3C;build>

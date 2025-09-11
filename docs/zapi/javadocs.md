@@ -4,4 +4,4 @@ description: More detailed information of the API
 
 # JavaDocs
 
-[https://javadocs.yleoft.me/zAPI/](https://javadocs.yleoft.me/zAPI/)
+[https://zplugins.yleoft.me/zAPI/javadocs/](https://zplugins.yleoft.me/zAPI/javadocs/)

@@ -6,18 +6,21 @@ description: Get started using the zHomes API.
 
 ## Declare zHomes dependency in your build files
 
-{% hint style="info" %}
-The dependency is published on [Maven Central](https://mvnrepository.com/repos/central), meaning you don't need to parse the repository.
-{% endhint %}
-
 ### Maven
 
 ```xml
+<repositories>
+    <repository>
+        <id>yl3oft-repo</id>
+        <url>https://repo.codemc.io/repository/yl3oft/</url>
+    </repository>
+</repositories>
+
 <dependencies>
     <dependency>
         <groupId>me.yleoft</groupId>
         <artifactId>zHomes</artifactId>
-        <version>2.1.6</version>
+        <version>2.1.7</version>
         <scope>provided</scope>
     </dependency>
 </dependencies>
@@ -26,7 +29,11 @@ The dependency is published on [Maven Central](https://mvnrepository.com/repos/c
 ### Gradle
 
 ```gradle
+repositories {
+    maven("https://repo.codemc.io/repository/yl3oft/")
+}
+
 dependencies {
-    compileOnly("me.yleoft:zHomes:2.1.6")
+    compileOnly("me.yleoft:zHomes:2.1.7")
 }
 ```
