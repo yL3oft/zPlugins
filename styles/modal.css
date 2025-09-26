@@ -1,0 +1,61 @@
+/* modal.css — modal container, controls, release content, assets and compare area */
+.modal.hidden{display:none;}
+.modal{position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;}
+.modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,0.55);backdrop-filter:blur(2px);transition:opacity .18s;}
+body.light .modal-backdrop{background:rgba(255,255,255,0.6);}
+
+.modal-content{
+  position:relative;z-index:2001;width:min(900px,92%);max-height:84vh;overflow:auto;
+  background:linear-gradient(145deg,#212126,#2b2b30);color:#e8eefb;border-radius:12px;padding:46px 26px 26px 26px;box-shadow:0 20px 60px rgba(0,0,0,0.5);
+}
+body.light .modal-content{background:linear-gradient(145deg,#fff,#fafafa);color:#222;}
+
+.modal-controls{position:absolute;top:10px;right:10px;z-index:2003;display:flex;gap:8px;align-items:center;}
+.modal-close{border:none;background:transparent;font-size:18px;color:inherit;cursor:pointer;padding:6px;border-radius:6px;}
+.modal-close:hover{transform:scale(1.08);background:rgba(255,255,255,0.02);}
+.modal-nav-btn{background:transparent;border:1px solid rgba(255,255,255,0.06);color:inherit;padding:6px 10px;border-radius:8px;cursor:pointer;font-weight:700;transition:transform .12s,background .12s,color .12s;}
+.modal-nav-btn:hover:not(.nav-disabled){transform:translateY(-2px);background:rgba(255,255,255,0.02);}
+body.light .modal-nav-btn{border:1px solid rgba(0,0,0,0.08);color:#0f1724;background:rgba(0,0,0,0.02);}
+.modal-nav-btn.nav-disabled,.modal-nav-btn[aria-disabled="true"]{opacity:.5;cursor:default;pointer-events:none;filter:grayscale(0.15);}
+body.light .modal-nav-btn.nav-disabled{opacity:.45;filter:none;color:#999;border-color:rgba(0,0,0,0.06);}
+
+.modal-copy-btn{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));color:#d9e7ff;border:1px solid rgba(255,255,255,0.06);padding:6px 10px;border-radius:8px;font-weight:700;cursor:pointer;transition:transform .12s,background .12s;}
+.modal-copy-btn:hover{transform:translateY(-2px);background:rgba(78,163,255,0.08);color:#fff;}
+body.light .modal-copy-btn{background:rgba(0,0,0,0.03);color:#0f1724;border:1px solid rgba(0,0,0,0.06);}
+
+/* release content */
+.release-title{font-size:20px;margin-bottom:8px;font-weight:700;}
+.release-meta{color:#9fb3d9;margin-bottom:14px;font-size:13px;}
+.release-body{line-height:1.6;}
+.release-body h1,.release-body h2,.release-body h3{margin-top:1rem;margin-bottom:.5rem;}
+.release-body pre{background:rgba(0,0,0,0.45);padding:12px;border-radius:8px;overflow:auto;}
+body.light .release-body pre{background:rgba(0,0,0,0.05);}
+
+/* assets */
+.modal-assets-list{margin-top:12px;display:flex;flex-direction:column;gap:8px;}
+.asset-row{display:flex;align-items:center;gap:8px;justify-content:space-between;border-radius:8px;padding:8px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);color:#e8eefb;}
+.asset-meta{display:flex;gap:10px;align-items:center;flex:1;min-width:0;}
+.asset-name{font-weight:700;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:inherit;}
+.asset-size{font-size:12px;color:#aebedc;}
+.asset-actions{display:flex;gap:6px;align-items:center;}
+.asset-link{text-decoration:none;padding:6px 10px;border-radius:8px;background:linear-gradient(180deg,#4ea3ff,#2e8ff7);color:white;font-weight:700;font-size:13px;}
+
+/* compare viewer */
+.compare-section{margin-top:12px;padding:10px;border-radius:8px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);}
+.compare-file{display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px dashed rgba(255,255,255,0.02);font-size:13px;}
+.compare-file:last-child{border-bottom:none;}
+.compare-file .filename{font-weight:700;color:#dfefff;}
+.compare-file.added .filename{color:#b7f0c2;}
+.compare-file.removed .filename{color:#ffc6c6;}
+.compare-file.modified .filename{color:#ffd89b;}
+
+@media (max-width:600px){
+  .modal-content{padding:36px 16px 16px 16px;}
+  .release-title{font-size:18px;}
+}
+
+/* light-mode asset overrides (kept here to ensure readability) */
+body.light .asset-row{background:linear-gradient(180deg,#ffffff,#fafbfc);border:1px solid rgba(15,23,36,0.06);color:#111827;}
+body.light .asset-name{color:#0f1724;}
+body.light .asset-size{color:#6b7280;}
+body.light .asset-link{background:linear-gradient(180deg,#0d6efd,#0b5ed7);color:#fff;}

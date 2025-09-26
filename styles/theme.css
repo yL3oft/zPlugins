@@ -1,0 +1,10 @@
+/* theme.css — light-mode overrides and small-screen tweaks */
+body.light .card-inner{background:linear-gradient(145deg,#fff,#f9f9f9);color:#222;}
+.card-inner.light-mode{background:linear-gradient(145deg,#fff,#f9f9f9);color:#222;}
+.card-inner.light-mode .card-desc{color:#444;}
+.card-inner.light-mode .btn.ghost{background:linear-gradient(180deg, rgba(0,0,0,0.04), rgba(0,0,0,0.02));color:#1f2937;border:1px solid rgba(0,0,0,0.06);}
+
+@media (max-width:600px){
+  .modal-content{padding:36px 16px 16px 16px;}
+  .release-title{font-size:18px;}
+}

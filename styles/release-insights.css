@@ -1,0 +1,23 @@
+/* release-insights.css — timeline pills, small calendars and related UI */
+.release-insights{margin-top:30px;display:flex;flex-direction:column;gap:18px;padding-bottom:12px;}
+.ins-section{display:flex;flex-direction:column;gap:12px;}
+.ins-title{font-weight:600;font-size:13px;opacity:.85;letter-spacing:.5px;text-transform:uppercase;}
+
+.timeline-pills{display:flex;flex-wrap:wrap;gap:8px;}
+.timeline-pill{background:#2d333d;color:#d9e7ff;border:1px solid #3a4450;padding:6px 10px;border-radius:20px;font-size:12px;cursor:pointer;transition:background .15s,transform .15s;}
+.timeline-pill:hover{background:#3a4350;transform:translateY(-2px);}
+.timeline-pill.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+body.light .timeline-pill{background:#eef2f7;color:#1d364c;border-color:#d2dae2;}
+body.light .timeline-pill:hover{background:#dfe7ef;}
+body.light .timeline-pill.active{background:#0d6ec1;border-color:#0d6ec1;color:#fff;}
+
+.calendar-wrap{display:flex;flex-wrap:wrap;gap:14px;}
+.month-block{display:flex;flex-direction:column;gap:6px;}
+.month-label{font-size:12px;font-weight:600;opacity:.8;text-align:center;}
+.month-grid{display:grid;grid-template-columns:repeat(7,16px);gap:3px;font-size:10px;justify-content:center;}
+.cal-cell{width:16px;height:16px;line-height:16px;text-align:center;border-radius:4px;background:#2d333d;color:var(--muted);font-weight:500;}
+.cal-cell.rel{background:var(--accent);color:#fff;}
+.cal-cell.empty{background:rgba(255,255,255,0.03);color:transparent;box-shadow:none;}
+body.light .cal-cell{background:#e8edf2;color:#33485b;}
+body.light .cal-cell.rel{background:#0d6ec1;color:#fff;}
+body.light .cal-cell.empty{background:#eef2f7;color:transparent;}

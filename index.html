@@ -5,21 +5,26 @@
     <title>zPlugins Projects</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link rel="icon" type="image/png" href="sources/global/logo.png">
-    <link rel="stylesheet" href="styles.css">
-    <!-- Marked.js for markdown rendering in modal -->
+
+    <!-- Styles split by concern -->
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/modal.css">
+    <link rel="stylesheet" href="styles/popovers.css">
+    <link rel="stylesheet" href="styles/search.css">
+    <link rel="stylesheet" href="styles/release-insights.css">
+    <link rel="stylesheet" href="styles/theme.css">
+
+    <!-- Marked.js & Fuse.js -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <!-- Fuse.js for fuzzy search & typo tolerance -->
     <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2/dist/fuse.min.js"></script>
 </head>
 <body>
-<!-- Dark mode toggle (top-right) -->
 <button class="dark-mode-toggle" id="toggleBtn" aria-label="Toggle theme">🌙</button>
-
-<!-- Minimalist refresh button (top-left) -->
 <button id="refreshBtn" class="refresh-btn" title="Refresh stats" aria-label="Refresh stats">⟳</button>
 
 <h1>
-    <!-- Banner: add dataset options so updateLogos can swap them on theme change -->
     <img src="sources/darkmode/banner.png"
          alt="Banner"
          id="banner"
@@ -31,35 +36,35 @@
 
 <div class="search-wrapper">
     <input type="text" id="searchBox" placeholder="Search projects..." class="search-input" aria-autocomplete="list" aria-haspopup="listbox" aria-expanded="false" aria-controls="searchSuggestions" />
-    <!-- Autocomplete suggestions (populated by script.js). Hidden by default. -->
     <ul id="searchSuggestions" class="search-suggestions" role="listbox" aria-label="Search suggestions" hidden></ul>
 </div>
 
 <div class="container" id="projectsContainer"></div>
 
 <footer>
-    © <span id="year"></span> zPlugins | <a href="https://github.com/yl3oft" target="_blank" rel="noopener">GitHub</a>
+    © <span id="year"></span> zPlugins | <a href="https://github.com/yL3oft" target="_blank" rel="noopener">GitHub</a>
 </footer>
 
-<!-- Release modal (hidden by default) -->
 <div id="releaseModal" class="modal hidden" aria-hidden="true" role="dialog" aria-labelledby="releaseTitle" aria-modal="true">
     <div class="modal-backdrop" id="modalBackdrop"></div>
     <div class="modal-content" role="document">
-        <!-- Controls container (top-right): Prev | Next | Copy | Close -->
         <div class="modal-controls" aria-hidden="false">
             <button id="modalPrev" class="modal-nav-btn" aria-label="Previous release" title="Previous release">◀ Previous</button>
             <button id="modalNext" class="modal-nav-btn" aria-label="Next release" title="Next release">Next ▶</button>
-            <!-- Restored copy button (replaces the badge generator) -->
             <button id="modalCopy" class="modal-copy-btn" aria-label="Copy deep link to current release" title="Copy deep link">Copy</button>
             <button class="modal-close" id="modalClose" aria-label="Close release notes">✕</button>
         </div>
-
-        <div id="releaseBody" class="modal-release-body">
-            <!-- Filled dynamically -->
-        </div>
+        <div id="releaseBody" class="modal-release-body"></div>
     </div>
 </div>
 
-<script src="script.js"></script>
+<!-- Scripts split by concern and loaded in dependency order -->
+<script src="scripts/utils.js"></script>
+<script src="scripts/github-api.js"></script>
+<script src="scripts/ui.js"></script>
+<script src="scripts/popovers.js"></script>
+<script src="scripts/search.js"></script>
+<script src="scripts/modal.js"></script>
+<script src="scripts/main.js"></script>
 </body>
 </html>

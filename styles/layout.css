@@ -1,0 +1,45 @@
+/* layout.css — grid layout, cards and general card internals */
+.container{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+  width:100%;
+  max-width:1200px;
+  justify-items:center;
+}
+@media (max-width:1000px){.container{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:600px){.container{grid-template-columns:1fr;padding:0 20px;}}
+
+.card{
+  border-radius:var(--card-radius);
+  width:100%;
+  max-width:360px;
+  cursor:default;
+  animation:fadeInUp .5s ease forwards;
+  opacity:0;
+  transform:translateY(20px);
+  transition:transform .3s cubic-bezier(0.25,1.25,0.5,1),box-shadow .3s,background .3s,opacity .3s;
+  position:relative;
+}
+.card.show{animation:fadeInUp .5s forwards;}
+.card-inner{
+  position:relative;
+  background:linear-gradient(145deg,#2c2c2c,#313131);
+  border-radius:var(--card-radius);
+  box-shadow:0 2px 8px rgba(0,0,0,0.15);
+  padding:18px;
+  text-align:center;
+  transition:transform .3s,box-shadow .3s,background .3s;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  min-height:170px;
+}
+.card:hover .card-inner{transform:translateY(-3px) scale(1.02);box-shadow:0 10px 30px rgba(0,0,0,0.35);}
+.card.hidden{display:none;}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0)}}
+
+.card-logo{width:72px;height:72px;border-radius:10px;object-fit:contain;align-self:center;background:rgba(0,0,0,0.08);padding:6px;transition:filter .3s;}
+.card h3{margin:0;font-size:18px;display:flex;gap:8px;justify-content:center;align-items:center;flex-wrap:wrap;}
+.card-desc{font-size:13px;color:#cfcfcf;margin:0;min-height:34px;}
+body.light .card-desc{color:#444;}

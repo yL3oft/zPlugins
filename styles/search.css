@@ -1,0 +1,13 @@
+/* search.css — autocomplete suggestions & small accessibility tweaks */
+.search-suggestions {
+    position:absolute; top:100%; left:0; right:0; background:#262b32; border:1px solid #39424c; border-radius:8px; margin-top:6px; padding:6px; list-style:none; max-height:320px; overflow-y:auto; z-index:1200; box-shadow:0 8px 28px rgba(0,0,0,0.4);
+}
+body.light .search-suggestions { background:#fff; border-color:#d0d6dd; box-shadow:0 8px 28px rgba(0,0,0,0.08); }
+.search-suggestions .suggestion-item { padding:8px 10px; cursor:pointer; font-size:14px; color:#d6e2f3; display:flex; align-items:center; gap:8px; transition:background .12s,color .12s; border-radius:6px; }
+.search-suggestions .suggestion-item + .suggestion-item { margin-top:6px; }
+.search-suggestions .suggestion-item strong { color:#fff; font-weight:700; display:block; }
+.search-suggestions .suggestion-item div { line-height:1.15; }
+.search-suggestions .suggestion-item.active, .search-suggestions .suggestion-item:hover { background:#34414a; }
+body.light .search-suggestions .suggestion-item { color:#222; }
+body.light .search-suggestions .suggestion-item strong { color:#0f1724; }
+body.light .search-suggestions .suggestion-item.active, body.light .search-suggestions .suggestion-item:hover { background:#eef6fd; }
