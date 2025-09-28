@@ -13,13 +13,30 @@ body {
     padding: 50px;
     transition: background 0.3s, color 0.3s;
     min-height: 100vh;
+
+    /* FIX: manter aparência consistente ao rolar */
+    background-attachment: fixed;
+    background-size: 100% 100vh;
+    background-repeat: no-repeat;
 }
 body.light {
     background: linear-gradient(135deg, #f4f4f4, #eaeaea);
     color: #333;
+    background-attachment: fixed;
+    background-size: 100% 100vh;
+    background-repeat: no-repeat;
 }
 
-/* ----------------- Header ----------------- */
+/* Fallbacks para performance / acessibilidade */
+@media (prefers-reduced-motion: reduce){
+  body { background:#1f1f1f; background-attachment: scroll; }
+  body.light { background:#f4f4f4; background-attachment: scroll; }
+}
+@media (max-width:480px){
+  body, body.light { background-attachment: scroll; }
+}
+
+/* Header */
 h1 {
     margin: 20px 0 30px 0;
     display: flex;

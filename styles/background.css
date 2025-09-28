@@ -1,0 +1,65 @@
+/* background.css — stacked canvas layers (starfield, parallax, constellations, comets, sparks)
+   and general placement. Removed focus-ripple styles (ripple feature removed).
+*/
+:root {
+  --effects-z: 0;
+}
+
+#bgCanvas,
+#parallaxCanvas,
+#auroraCanvas,
+#constellationCanvas,
+#cometCanvas,
+#sparksCanvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: var(--effects-z);
+  display: block;
+  will-change: transform, opacity;
+  transition: opacity 0.35s ease;
+}
+
+/* stack order: background (lowest) -> parallax -> aurora -> constellations -> comets -> sparks -> UI (z-index:1) */
+#bgCanvas { z-index: 0; }
+#parallaxCanvas { z-index: 1; }
+#auroraCanvas { z-index: 2; } /* aurora layer kept in markup but effect has been disabled in JS */
+#constellationCanvas { z-index: 3; }
+#cometCanvas { z-index: 4; }
+#sparksCanvas { z-index: 5; }
+
+/* In light mode slightly reduce opacity to keep text readable */
+body.light #bgCanvas,
+body.light #parallaxCanvas,
+body.light #auroraCanvas,
+body.light #constellationCanvas,
+body.light #cometCanvas,
+body.light #sparksCanvas {
+  opacity: 0.9;
+}
+
+/* ensure page content sits above the effects */
+.page-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+}
+
+/* prefers-reduced-motion fallback: hide animated canvases and use single static background */
+@media (prefers-reduced-motion: reduce) {
+  #parallaxCanvas, #auroraCanvas, #constellationCanvas, #cometCanvas, #sparksCanvas {
+    display: none;
+  }
+  #bgCanvas { opacity: 0.8; }
+}
+
+/* responsiveness: on tiny viewports reduce canvas alpha */
+@media (max-width: 420px) {
+  #bgCanvas, #parallaxCanvas, #auroraCanvas { opacity: 0.85; }
+}
