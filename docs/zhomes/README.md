@@ -3,7 +3,7 @@ description: >-
   A very complex homes plugins, including alot of features that convencional
   home plugins don't have
 cover: ../.gitbook/assets/zHomes Banner 2.png
-coverY: -16.70769230769231
+coverY: 0
 ---
 
 # zHomes
@@ -15,8 +15,8 @@ coverY: -16.70769230769231
 ## Requirements
 
 * **Java 17 or above**
-* **Version 1.8 - 1.21.8 \[Spigot, Paper, Purpur, Pufferfish]**
-* **Version 1.20 - 1.21 \[Folia]**
+* **Version 1.8 - Latest (1.21.9) \[Spigot, Paper, Purpur, Pufferfish]**
+* **Version 1.20 - Latest (1.21.8) \[Folia]**
 
 | Soft Depend                                                               | Use                                                                |
 | ------------------------------------------------------------------------- | ------------------------------------------------------------------ |

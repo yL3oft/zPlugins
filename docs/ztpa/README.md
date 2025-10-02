@@ -13,8 +13,8 @@ coverY: 0
 ## Requirements
 
 * **Java 17 or above**
-* **Version 1.8 - 1.21.8 \[Spigot, Paper, Purpur, Pufferfish]**
-* **Version 1.20 - 1.21 \[Folia]**
+* **Version 1.8 - Latest (1.21.9) \[Spigot, Paper, Purpur, Pufferfish]**
+* **Version 1.20 - Latest (1.21.8) \[Folia]**
 
 | Soft Depend                                              | Use                                                          |
 | -------------------------------------------------------- | ------------------------------------------------------------ |

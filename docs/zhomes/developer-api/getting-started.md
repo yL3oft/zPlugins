@@ -20,7 +20,7 @@ description: Get started using the zHomes API.
     <dependency>
         <groupId>me.yleoft</groupId>
         <artifactId>zHomes</artifactId>
-        <version>2.1.7</version>
+        <version>2.1.8</version>
         <scope>provided</scope>
     </dependency>
 </dependencies>
@@ -34,6 +34,6 @@ repositories {
 }
 
 dependencies {
-    compileOnly("me.yleoft:zHomes:2.1.7")
+    compileOnly("me.yleoft:zHomes:2.1.8")
 }
 ```
