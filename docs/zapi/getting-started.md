@@ -46,7 +46,7 @@ description: Get started using the zAPI API.
 </strong>    &#x3C;dependency>
         &#x3C;groupId>me.yleoft&#x3C;/groupId>
         &#x3C;artifactId>zAPI&#x3C;/artifactId>
-        &#x3C;version>1.4.8&#x3C;/version>
+        &#x3C;version>1.4.9&#x3C;/version>
         &#x3C;scope>compile&#x3C;/scope>
     &#x3C;/dependency>
 &#x3C;/dependencies>
@@ -68,7 +68,7 @@ repositories {
 }
 
 dependencies {
-    implementation("me.yleoft:zAPI:1.4.8")
+    implementation("me.yleoft:zAPI:1.4.9")
 }
 
 shadowJar {
