@@ -181,6 +181,14 @@ window.zp = window.zp || {};
         addBtn(info.wiki, 'Wiki', { iconSrc: 'sources/global/wiki.svg', btnClass: 'wiki' });
         addBtn(info.url, 'GitHub', { iconSrc: 'sources/global/github.svg', btnClass: 'github' });
         addBtn(info.jenkins, 'Jenkins', { iconSrc: 'sources/global/jenkins.svg', btnClass: 'jenkins' });
+
+        // Javadocs: only show if info.javadocs is NOT explicitly false.
+        // If info.javadocs is a non-empty string, use it as the URL; otherwise fall back to default folder path.
+        if(info.javadocs !== false){
+            const javadocUrl = (typeof info.javadocs === 'string' && info.javadocs.trim() !== '') ? info.javadocs : `${folderName}/javadocs/`;
+            addBtn(javadocUrl, 'Javadocs', { iconText: '📚', btnClass: 'javadocs' });
+        }
+
         if(info['bstats-id']){
             const id = info['bstats-id'];
             if(id !== "" && id !== null){
@@ -189,8 +197,6 @@ window.zp = window.zp || {};
                 addBtn(bstatsLink, 'bStats', { iconSrc: 'sources/global/bstats.png', btnClass: 'bstats' });
             }
         }
-        const javadocUrl = `${folderName}/javadocs/`;
-        addBtn(javadocUrl, 'Javadocs', { iconText: '📚', btnClass: 'javadocs' });
 
         inner.appendChild(btns);
         card.appendChild(inner);
