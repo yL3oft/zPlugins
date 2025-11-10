@@ -96,3 +96,35 @@ footer a:hover::after{width:100%;opacity:1;}
 body.light footer{color:#666;}
 body.light footer a{color:#0f4b7a;}
 body.light footer a:hover{color:#005fa3;}
+
+.brand-row {
+  display: inline-flex;
+  align-items: center; /* vertically centers the text relative to the logo */
+  gap: 12px;
+  justify-content: center;
+}
+
+/* Rounded logo, fixed size; keep object-fit so square source looks good */
+.brand-logo {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Slight vertical nudging if you want the text a bit higher relative to the circle.
+   Adjust translateY value to taste (negative moves text up). */
+.brand-text {
+  display: inline-block;
+  line-height: 1;
+  font-size: 28px; /* matches h1 sizing in your design; adjust if needed */
+  transform: translateY(-2px);
+  font-weight: 700;
+}
+
+/* On smaller screens reduce size */
+@media (max-width: 480px) {
+  .brand-logo { width: 48px; height: 48px; }
+  .brand-text { font-size: 20px; transform: translateY(-1px); }
+}

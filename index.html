@@ -35,13 +35,12 @@
     <button id="refreshBtn" class="refresh-btn" title="Refresh stats" aria-label="Refresh stats">⟳</button>
 
     <h1>
-        <img src="sources/darkmode/banner.png"
-             alt="Banner"
-             id="banner"
-             data-dark-options='["sources/darkmode/banner.png","sources/global/banner.png"]'
-             data-light-options='["sources/lightmode/banner.png","sources/global/banner-light.png"]'
-        >
-        Projects
+        <!-- brand-row keeps the logo and text on the same line and vertically centers the text
+             with respect to the circular logo. The img keeps id="banner" so scripts remain compatible. -->
+        <span class="brand-row">
+            <img id="banner" class="brand-logo" src="sources/global/yleoft.png" alt="yLeoft logo">
+            <span class="brand-text">yLeoft Projects</span>
+        </span>
     </h1>
 
     <div class="search-wrapper">
