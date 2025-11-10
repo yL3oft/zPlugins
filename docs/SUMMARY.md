@@ -50,3 +50,6 @@
     * [Getting Started](ztpa/developer-api/getting-started.md)
     * [Events](ztpa/developer-api/events.md)
     * [JavaDocs](ztpa/developer-api/javadocs.md)
+* [Voicechat WorldGuard](voicechat-worldguard/README.md)
+  * [Permissions](voicechat-worldguard/permissions.md)
+  * [Flags](voicechat-worldguard/flags.md)
