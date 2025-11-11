@@ -1,6 +1,7 @@
 {
   "name": "zHomes",
-  "description": "Your new favorite homes plugin! (Maybe?)",
+  "description": "A powerful home management plugin for spigot/paper servers.",
+  "description_pt": "Um poderoso plugin de gerenciamento de 'casas' para servidores spigot/paper.",
   "url": "https://github.com/yL3oft/zHomes",
   "jenkins": "https://ci.codemc.io/job/yL3oft/job/zHomes/",
   "wiki": "https://docs.yleoft.me/zhomes",

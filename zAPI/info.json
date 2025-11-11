@@ -1,6 +1,7 @@
 {
   "name": "zAPI",
-  "description": "zAPI is a library for Bukkit/Spigot/Paper plugins.",
+  "description": "zAPI is a library for creating Bukkit/Spigot/Paper plugins.",
+  "description_pt": "zAPI é uma biblioteca para criação de plugins Bukkit/Spigot/Paper.",
   "url": "https://github.com/yL3oft/zAPI",
   "jenkins": "https://ci.codemc.io/job/yL3oft/job/zAPI/",
   "wiki": "https://docs.yleoft.me/zapi",

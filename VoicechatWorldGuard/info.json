@@ -1,6 +1,7 @@
 {
   "name": "Voicechat WorldGuard",
-  "description": "Add custom WorldGuard flags for Simple Voice ChatAdd custom WorldGuard flags for Simple Voice Chat",
+  "description": "Add custom WorldGuard flags for Simple Voice Chat.",
+  "description_pt": "Adiciona flags personalizadas do WorldGuard para o Simple Voice Chat.",
   "url": "https://github.com/yL3oft/VoicechatWorldguard",
   "jenkins": "",
   "wiki": "https://docs.yleoft.me/voicechat-worldguard",

@@ -32,9 +32,15 @@ window.zp = window.zp || {};
         suggestionsEl.hidden = false; if(searchBox) searchBox.setAttribute('aria-expanded','true');
         const max = Math.min(8, results.length);
         for(let i=0;i<max;i++){
-            const item = results[i].item ? results[i].item : results[i];
+            const raw = results[i].item ? results[i].item : results[i];
+            const item = raw;
+            // Prefer Portuguese description when language is pt-BR and description_pt exists
+            const lang = (ns && ns.i18n && ns.i18n.current) ? ns.i18n.current : (window.zp && window.zp.i18n && window.zp.i18n.current ? window.zp.i18n.current : 'en');
+            const descRaw = (lang === 'pt-BR' && (item.description_pt || item.description_pt === '')) ? (item.description_pt || '') : (item.description || '');
+            const descShort = (descRaw || '').slice(0,120);
+
             const li = document.createElement('li'); li.className='suggestion-item'; li.setAttribute('role','option'); li.setAttribute('data-idx', item.idx);
-            li.innerHTML = `<div style="flex:1;min-width:0"><strong>${u.escapeHtml(item.name)}</strong><div style="font-size:12px;opacity:0.85">${u.escapeHtml((item.description||'').slice(0,120))}</div></div>`;
+            li.innerHTML = `<div style="flex:1;min-width:0"><strong>${u.escapeHtml(item.name)}</strong><div style="font-size:12px;opacity:0.85">${u.escapeHtml(descShort)}</div></div>`;
             li.addEventListener('mousedown', (ev) => { ev.preventDefault(); completeWithSuggestion(item); });
             li.addEventListener('mouseenter', () => { setSuggestionActive(i); });
             suggestionsEl.appendChild(li);
@@ -88,6 +94,18 @@ window.zp = window.zp || {};
 
         document.addEventListener('click', (e) => {
             if(!suggestionsEl.contains(e.target) && e.target !== searchBox) clearSuggestions();
+        });
+
+        // When language changes, re-render suggestions according to new language
+        document.addEventListener('zp:langchange', () => {
+            const filter = searchBox.value.trim();
+            if(fuse && filter.length > 0){
+                const res = fuse.search(filter, { limit: 12 });
+                renderSuggestions(res);
+            } else {
+                // if nothing typed, clear suggestions and leave cards updated elsewhere
+                clearSuggestions();
+            }
         });
     }
 

@@ -56,6 +56,23 @@ window.zp = window.zp || {};
             const opts = document.body.classList.contains('light') ? lightB : darkB;
             if(opts && opts.length) setElementSrcFromOptions(banner, opts);
         }
+        document.querySelectorAll('[data-light-options][data-dark-options]').forEach(el => {
+            // avoid re-processing card-logo since handled above, but harmless if repeated
+            if(el.classList.contains('card-logo')) return;
+            try {
+                const light = JSON.parse(el.getAttribute('data-light-options') || '[]');
+                const dark = JSON.parse(el.getAttribute('data-dark-options') || '[]');
+                const opts = document.body.classList.contains('light') ? light : dark;
+                // if element is <img> use src change, else try background-image
+                if(el.tagName === 'IMG'){
+                    setElementSrcFromOptions(el, opts);
+                } else {
+                    if(opts && opts.length){
+                        el.style.backgroundImage = `url("${opts[0]}")`;
+                    }
+                }
+            } catch(e){}
+        });
         updateCardTheme();
     }
     function updateCardTheme(){
@@ -73,8 +90,12 @@ window.zp = window.zp || {};
 
     // renderProject kept as a single helper (it uses many api functions)
     function renderProject(folderName, info, index){
+        const i18n = ns.i18n;
         const container = document.getElementById('projectsContainer');
         const card = document.createElement('div'); card.className = 'card'; card.style.position = 'relative';
+        // store folder name for later updates if needed
+        card.dataset.folder = folderName;
+
         const inner = document.createElement('div'); inner.className = 'card-inner';
         if(document.body.classList.contains('light')) inner.classList.add('light-mode');
 
@@ -95,8 +116,8 @@ window.zp = window.zp || {};
 
         const rightGroup = document.createElement('span'); rightGroup.style.display='inline-flex'; rightGroup.style.alignItems='center'; rightGroup.style.gap='6px';
         const versionBadge = document.createElement('span'); versionBadge.className='version badge-link'; versionBadge.dataset.version='';
-        if(isOnDev){ versionBadge.textContent='On development'; versionBadge.classList.add('dev-badge'); versionBadge.dataset.version=''; versionBadge.title='This project is in active development'; }
-        else { versionBadge.textContent='loading...'; versionBadge.title='Release version'; }
+        if(isOnDev){ versionBadge.textContent = i18n.t('on_development'); versionBadge.classList.add('dev-badge'); versionBadge.dataset.version=''; versionBadge.title = i18n.t('on_development'); }
+        else { versionBadge.textContent = i18n.t('loading'); versionBadge.title = i18n.t('modal.published'); }
         rightGroup.appendChild(versionBadge);
 
         const licensePill = document.createElement('span'); licensePill.className='license-pill'; licensePill.style.display='none'; licensePill.setAttribute('aria-hidden','true');
@@ -124,17 +145,22 @@ window.zp = window.zp || {};
         }
         inner.appendChild(statsRow);
 
-        const desc = document.createElement('p'); desc.className='card-desc'; desc.textContent = info.description || '';
+        // Description: store both english and pt in data attributes so we can switch on language change
+        const desc = document.createElement('p'); desc.className='card-desc';
+        desc.dataset.desc = info.description || '';
+        desc.dataset.descPt = info.description_pt || '';
+        // choose initial description based on current language
+        desc.textContent = (ns.i18n && ns.i18n.current === 'pt-BR' && desc.dataset.descPt && desc.dataset.descPt.trim()) ? desc.dataset.descPt : desc.dataset.desc;
         inner.appendChild(desc);
 
-        const infoBtn = document.createElement('button'); infoBtn.className = 'check-info'; infoBtn.type='button'; infoBtn.setAttribute('aria-label','Last checked info');
+        const infoBtn = document.createElement('button'); infoBtn.className = 'check-info'; infoBtn.type='button'; infoBtn.setAttribute('aria-label', ns.i18n.t('last_checked'));
         infoBtn.innerHTML = `<span class="dot" aria-hidden="true"></span>`;
         function showInfoTooltip(){
             const ghTs = infoBtn.dataset.ghChecked ? parseInt(infoBtn.dataset.ghChecked,10) : null;
             const dlTs = infoBtn.dataset.dlChecked ? parseInt(infoBtn.dataset.dlChecked,10) : null;
-            const ghStr = ghTs ? `GH stats: ${u.timeAgo(ghTs)}` : 'GH stats: not checked';
-            const dlStr = dlTs ? `Downloads: ${u.timeAgo(dlTs)}` : 'Downloads: not checked';
-            showTooltip(infoBtn, `<div style="font-weight:700">Last checked</div><div style="margin-top:6px">${u.escapeHtml(ghStr)}<br>${u.escapeHtml(dlStr)}</div>`);
+            const ghStr = ghTs ? `GH stats: ${u.timeAgo(ghTs)}` : ns.i18n.t('gh_stats_not_checked');
+            const dlStr = dlTs ? `Downloads: ${u.timeAgo(dlTs)}` : ns.i18n.t('downloads_not_checked');
+            showTooltip(infoBtn, `<div style="font-weight:700">${u.escapeHtml(ns.i18n.t('last_checked'))}</div><div style="margin-top:6px">${u.escapeHtml(ghStr)}<br>${u.escapeHtml(dlStr)}</div>`);
         }
         infoBtn.addEventListener('mouseenter', showInfoTooltip);
         infoBtn.addEventListener('focus', showInfoTooltip);
@@ -156,14 +182,29 @@ window.zp = window.zp || {};
             if(isOnDev && !isAllowedWhileDev){
                 const a = document.createElement('a'); a.className = 'btn' + (isGhost ? ' ghost' : ' primary'); a.classList.add('dev-disabled');
                 if(opts.btnClass) a.classList.add(opts.btnClass);
-                a.setAttribute('aria-disabled','true'); a.setAttribute('role','button'); a.tabIndex = 0; a.title = `${label} (disabled while project is in development)`;
+                a.setAttribute('aria-disabled','true'); a.setAttribute('role','button'); a.tabIndex = 0; a.title = `${label} (${ns.i18n.t('on_development')})`;
                 if(opts.iconSrc){
-                    const iconImg = document.createElement('img'); iconImg.className='btn-icon'; if(opts.iconClass) iconImg.classList.add(opts.iconClass); iconImg.src = opts.iconSrc; iconImg.alt = `${label} icon`; a.appendChild(iconImg);
+                    const iconImg = document.createElement('img'); iconImg.className='btn-icon'; if(opts.iconClass) iconImg.classList.add(opts.iconClass);
+                    // try to wire light/dark variants automatically when icon looks like sources/global/<name>
+                    try {
+                        if(typeof opts.iconSrc === 'string' && opts.iconSrc.indexOf('/global/') !== -1){
+                            const base = opts.iconSrc.split('/').pop();
+                            const darkOpts = [`sources/darkmode/${base}`, opts.iconSrc];
+                            const lightOpts = [`sources/lightmode/${base}`, opts.iconSrc];
+                            iconImg.dataset.darkOptions = JSON.stringify(darkOpts);
+                            iconImg.dataset.lightOptions = JSON.stringify(lightOpts);
+                            const initial = document.body.classList.contains('light') ? lightOpts : darkOpts;
+                            setElementSrcFromOptions(iconImg, initial);
+                        } else {
+                            iconImg.src = opts.iconSrc;
+                        }
+                    } catch(e){ iconImg.src = opts.iconSrc; }
+                    iconImg.alt = `${label} icon`; a.appendChild(iconImg);
                 } else if(opts.iconText){
                     const iconSpan = document.createElement('span'); iconSpan.className='btn-icon-text'; iconSpan.textContent = opts.iconText; a.appendChild(iconSpan);
                 }
                 const span = document.createElement('span'); span.textContent = label; a.appendChild(span);
-                const tooltipHtml = `<div><strong>${label}</strong></div><div>Disabled while project is in active development.</div>`;
+                const tooltipHtml = `<div><strong>${label}</strong></div><div>${u.escapeHtml(ns.i18n.t('disabled_dev_tooltip', [label]))}</div>`;
                 a.addEventListener('mouseenter', () => showTooltip(a, tooltipHtml)); a.addEventListener('mouseleave', hideTooltip);
                 a.addEventListener('focus', () => showTooltip(a, tooltipHtml)); a.addEventListener('blur', hideTooltip);
                 a.addEventListener('click', (e) => { e.preventDefault(); showTooltip(a, tooltipHtml); setTimeout(hideTooltip, 1800); });
@@ -172,8 +213,26 @@ window.zp = window.zp || {};
             }
             const a = document.createElement('a'); a.className = 'btn' + (isGhost ? ' ghost' : ' primary'); if(opts.btnClass) a.classList.add(opts.btnClass);
             a.href = href; a.target = '_blank'; a.rel = 'noopener'; a.title = label;
-            if(opts.iconSrc){ const iconImg = document.createElement('img'); iconImg.className='btn-icon'; if(opts.iconClass) iconImg.classList.add(opts.iconClass); iconImg.src = opts.iconSrc; iconImg.alt = `${label} icon`; a.appendChild(iconImg); }
-            else if(opts.iconText){ const iconSpan = document.createElement('span'); iconSpan.className='btn-icon-text'; iconSpan.textContent = opts.iconText; a.appendChild(iconSpan); }
+            if(opts.iconSrc){
+                const iconImg = document.createElement('img'); iconImg.className='btn-icon'; if(opts.iconClass) iconImg.classList.add(opts.iconClass);
+                // if icon path is a known global asset, try dark/light mode variants
+                try {
+                    if(typeof opts.iconSrc === 'string' && opts.iconSrc.indexOf('/global/') !== -1){
+                        const base = opts.iconSrc.split('/').pop();
+                        const darkOpts = [`sources/darkmode/${base}`, opts.iconSrc];
+                        const lightOpts = [`sources/lightmode/${base}`, opts.iconSrc];
+                        iconImg.dataset.darkOptions = JSON.stringify(darkOpts);
+                        iconImg.dataset.lightOptions = JSON.stringify(lightOpts);
+                        const initial = document.body.classList.contains('light') ? lightOpts : darkOpts;
+                        setElementSrcFromOptions(iconImg, initial);
+                    } else {
+                        iconImg.src = opts.iconSrc;
+                    }
+                } catch(e){ iconImg.src = opts.iconSrc; }
+                iconImg.alt = `${label} icon`; a.appendChild(iconImg);
+            } else if(opts.iconText){
+                const iconSpan = document.createElement('span'); iconSpan.className='btn-icon-text'; iconSpan.textContent = opts.iconText; a.appendChild(iconSpan);
+            }
             const span = document.createElement('span'); span.textContent = label; a.appendChild(span);
             btns.appendChild(a);
         }
@@ -347,13 +406,13 @@ window.zp = window.zp || {};
                 const repo = u.parseGitHubRepo(info.url);
                 if(!repo) return;
                 ns.modal.openModal();
-                ns.modal.releaseBody.innerHTML = `<div style="opacity:0.75">Loading release notes…</div>`;
+                ns.modal.releaseBody.innerHTML = `<div style="opacity:0.75">${u.escapeHtml(ns.i18n.t('modal.loading_releases'))}</div>`;
                 ns.modal.modalCurrentRepo = `${repo.owner}/${repo.repo}`;
                 ns.modal.modalReleases = []; ns.modal.modalReleaseIndex = 0;
                 const list = await api.fetchReleasesList(info.url);
                 if(!list || (list && list.__error)){
                     if(list && list.__error === 'rate_limit'){ ns.modal.releaseBody.innerHTML = `<div style="color:#ffd89b">GitHub API rate limited. Please try again later or use the refresh button.</div>`; }
-                    else { ns.modal.releaseBody.innerHTML = `<div style="color:#ff6b6b">No releases found for <b>${u.escapeHtml(ns.modal.modalCurrentRepo)}</b>.</div>`; }
+                    else { ns.modal.releaseBody.innerHTML = `<div style="color:#ff6b6b">${u.escapeHtml(ns.i18n.t('modal.no_releases'))} <b>${u.escapeHtml(ns.modal.modalCurrentRepo)}</b>.</div>`; }
                     ns.modal.updateModalNavButtons();
                     return;
                 }
@@ -366,7 +425,7 @@ window.zp = window.zp || {};
             });
         } else {
             versionBadge.style.cursor = 'default';
-            const vHtml = `<div><strong>In development</strong></div><div>This project is currently under active development — no release badge shown.</div>`;
+            const vHtml = `<div><strong>${u.escapeHtml(ns.i18n.t('on_development'))}</strong></div><div>${u.escapeHtml(ns.i18n.t('on_development'))} — no release badge shown.</div>`;
             versionBadge.addEventListener('mouseenter', () => showTooltip(versionBadge, vHtml));
             versionBadge.addEventListener('mouseleave', hideTooltip);
         }
@@ -379,6 +438,17 @@ window.zp = window.zp || {};
             if(expanded) ns.popovers.hideContribPopover(); else ns.popovers.showContribPopover(contribToggle, repoUrl, { name: info.name || folderName });
         });
     }
+
+    // update card descriptions when language changes
+    document.addEventListener('zp:langchange', () => {
+        document.querySelectorAll('.card').forEach(card => {
+            const descEl = card.querySelector('.card-desc');
+            if(!descEl) return;
+            const pt = descEl.dataset.descPt || '';
+            const en = descEl.dataset.desc || '';
+            descEl.textContent = (ns.i18n && ns.i18n.current === 'pt-BR' && pt && pt.trim()) ? pt : en;
+        });
+    });
 
     ns.ui = { showTooltip, hideTooltip, setElementSrcFromOptions, updateLogos, updateCardTheme, setNavButtonState, renderProject };
 })(window.zp);

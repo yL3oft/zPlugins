@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <title>zPlugins Projects</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link rel="icon" type="image/png" href="sources/global/logo.png">
+    <link rel="icon" type="image/png" href="sources/global/yleoft.png">
 
     <!-- Styles split by concern -->
     <link rel="stylesheet" href="styles/base.css">
@@ -32,19 +32,37 @@
 
 <div class="page-content">
     <button class="dark-mode-toggle" id="toggleBtn" aria-label="Toggle theme">🌙</button>
-    <button id="refreshBtn" class="refresh-btn" title="Refresh stats" aria-label="Refresh stats">⟳</button>
+
+    <!-- Discord button (top-left) -->
+    <a id="discordBtn" class="discord-btn" href="https://discord.gg/yCdhVDgn4K" title="Discord" aria-label="Discord" target="_blank" rel="noopener">
+        <img src="sources/global/discord.svg" alt="Discord" style="width:18px;height:18px;display:block"/>
+    </a>
+
+    <!-- GitHub button below Discord (uses theme variants) -->
+    <a id="githubBtn" class="github-top-btn" href="https://github.com/yL3oft" title="GitHub" aria-label="GitHub" target="_blank" rel="noopener">
+        <img id="githubTopImg"
+             data-dark-options='["sources/darkmode/github.svg","sources/global/github.svg"]'
+             data-light-options='["sources/lightmode/github.svg","sources/global/github.svg"]'
+             alt="GitHub"
+             style="width:18px;height:18px;display:block" />
+    </a>
+
+    <!-- Language toggle (top-right area near theme toggle) -->
+    <div class="lang-toggle-wrap" id="langToggleWrap" aria-hidden="false">
+        <button id="langToggle" class="lang-toggle" title="Switch language" aria-label="Switch language" data-i18n="lang.toggle">EN</button>
+    </div>
 
     <h1>
-        <!-- brand-row keeps the logo and text on the same line and vertically centers the text
-             with respect to the circular logo. The img keeps id="banner" so scripts remain compatible. -->
         <span class="brand-row">
             <img id="banner" class="brand-logo" src="sources/global/yleoft.png" alt="yLeoft logo">
-            <span class="brand-text">yLeoft Projects</span>
+            <span id="brandText" class="brand-text" data-i18n="brand">yLeoft Projects</span>
         </span>
     </h1>
 
+    <button id="refreshBtn" class="refresh-btn" title="Refresh stats" aria-label="Refresh stats">⟳</button>
+
     <div class="search-wrapper">
-        <input type="text" id="searchBox" placeholder="Search projects..." class="search-input" aria-autocomplete="list" aria-haspopup="listbox" aria-expanded="false" aria-controls="searchSuggestions" />
+        <input type="text" id="searchBox" placeholder="Search projects..." class="search-input" aria-autocomplete="list" aria-haspopup="listbox" aria-expanded="false" aria-controls="searchSuggestions" data-i18n="search.placeholder" />
         <ul id="searchSuggestions" class="search-suggestions" role="listbox" aria-label="Search suggestions" hidden></ul>
     </div>
 
@@ -58,10 +76,10 @@
         <div class="modal-backdrop" id="modalBackdrop"></div>
         <div class="modal-content" role="document">
             <div class="modal-controls" aria-hidden="false">
-                <button id="modalPrev" class="modal-nav-btn" aria-label="Previous release" title="Previous release">◀ Previous</button>
-                <button id="modalNext" class="modal-nav-btn" aria-label="Next release" title="Next release">Next ▶</button>
-                <button id="modalCopy" class="modal-copy-btn" aria-label="Copy deep link to current release" title="Copy deep link">Copy</button>
-                <button class="modal-close" id="modalClose" aria-label="Close release notes">✕</button>
+                <button id="modalPrev" class="modal-nav-btn" data-i18n="modal.prev" aria-label="Previous release">◀ Previous</button>
+                <button id="modalNext" class="modal-nav-btn" data-i18n="modal.next" aria-label="Next release">Next ▶</button>
+                <button id="modalCopy" class="modal-copy-btn" data-i18n="modal.copy" aria-label="Copy deep link to current release" title="Copy deep link">Copy</button>
+                <button class="modal-close" id="modalClose" data-i18n="modal.close" aria-label="Close release notes">✕</button>
             </div>
             <div id="releaseBody" class="modal-release-body"></div>
         </div>
@@ -70,6 +88,7 @@
 
 <!-- Scripts split by concern and loaded in dependency order -->
 <script src="scripts/utils.js"></script>
+<script src="scripts/i18n.js"></script>
 <script src="scripts/github-api.js"></script>
 <script src="scripts/ui.js"></script>
 <script src="scripts/popovers.js"></script>

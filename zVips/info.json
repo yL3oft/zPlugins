@@ -1,6 +1,7 @@
 {
   "name": "zVips",
-  "description": "Your new favorite VIP management plugin! (Maybe?)",
+  "description": "VIP management plugin for Minecraft servers, allowing easy VIP management with commands and GUI.",
+  "description_pt": "Plugin de gerenciamento de VIPs para servidores Minecraft, permitindo fácil gerenciamento de VIPs com comandos e GUI.",
   "url": "https://github.com/yL3oft/zVips",
   "jenkins": "https://ci.codemc.io/job/yL3oft/job/zVips/",
   "wiki": "https://docs.yleoft.me/zvips",

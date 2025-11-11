@@ -1,6 +1,7 @@
 {
   "name": "zTPA",
-  "description": "Your new favorite tpa plugin! (Maybe?)",
+  "description": "A powerful teleportation request plugin for Minecraft servers.",
+  "description_pt": "Um poderoso plugin de solicitação de teletransporte para servidores Minecraft.",
   "url": "https://github.com/yL3oft/zTPA",
   "jenkins": "https://ci.codemc.io/job/yL3oft/job/zTPA/",
   "wiki": "https://docs.yleoft.me/ztpa",

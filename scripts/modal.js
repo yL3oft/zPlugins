@@ -1,4 +1,3 @@
-// modal.js — release modal rendering, compare menu, nav & copy behavior
 window.zp = window.zp || {};
 (function(ns){
     const u = ns.utils;
@@ -39,6 +38,20 @@ window.zp = window.zp || {};
         setNavButtonState(modalPrev, !atOldest);
     }
 
+    // Ensure modal control labels use i18n and update on language change.
+    function updateModalControlLabels(){
+        try {
+            if(modalPrev) modalPrev.textContent = ns.i18n ? ns.i18n.t('modal.prev') : 'Previous';
+            if(modalNext) modalNext.textContent = ns.i18n ? ns.i18n.t('modal.next') : 'Next';
+            if(modalCopy) modalCopy.textContent = ns.i18n ? ns.i18n.t('modal.copy') : 'Copy';
+            if(modalClose) modalClose.textContent = ns.i18n ? ns.i18n.t('modal.close') : '✕';
+        } catch(e){}
+    }
+    // initial labels
+    updateModalControlLabels();
+    // update on language change
+    document.addEventListener('zp:langchange', updateModalControlLabels);
+
     modalPrev.addEventListener('click', () => {
         if(!ns.modal.modalReleases || ns.modal.modalReleases.length === 0) return;
         if(ns.modal.modalReleaseIndex >= ns.modal.modalReleases.length - 1) return;
@@ -58,23 +71,23 @@ window.zp = window.zp || {};
             e.stopPropagation();
             const tag = modalCopy.dataset.tag || '';
             const repoStr = modalCopy.dataset.repo || ns.modal.modalCurrentRepo || '';
-            if(!tag || !repoStr){ ns.ui.showTooltip(modalCopy, `<div><strong>No release</strong></div><div>Nothing to copy</div>`); setTimeout(ns.ui.hideTooltip, 1200); return; }
+            if(!tag || !repoStr){ ns.ui.showTooltip(modalCopy, `<div><strong>${u.escapeHtml(ns.i18n.t('modal.copy_nothing'))}</strong></div><div>Nothing to copy</div>`); setTimeout(ns.ui.hideTooltip, 1200); return; }
             try {
                 const base = `${location.origin}${location.pathname}`;
                 const deepHash = `#release:${repoStr}:${encodeURIComponent(tag)}`;
                 const full = `${base}${deepHash}`;
                 await navigator.clipboard.writeText(full);
-                const prev = modalCopy.textContent; modalCopy.textContent = '✓ Copied'; setTimeout(()=>{ modalCopy.textContent = prev; },1200);
+                const prev = modalCopy.textContent; modalCopy.textContent = ns.i18n.t('modal.copy_copied'); setTimeout(()=>{ modalCopy.textContent = prev; },1200);
             } catch {
-                const prev = modalCopy.textContent; modalCopy.textContent = 'Failed'; setTimeout(()=>{ modalCopy.textContent = prev; },1200);
+                const prev = modalCopy.textContent; modalCopy.textContent = ns.i18n.t('modal.copy_failed'); setTimeout(()=>{ modalCopy.textContent = prev; },1200);
             }
         });
     }
 
     function renderModalReleaseAt(index){
-        if(!ns.modal.modalReleases || !ns.modal.modalReleases.length){ releaseBody.innerHTML = `<div style="color:#ff6b6b">No releases available.</div>`; updateModalNavButtons(); return; }
+        if(!ns.modal.modalReleases || !ns.modal.modalReleases.length){ releaseBody.innerHTML = `<div style="color:#ff6b6b">${u.escapeHtml(ns.i18n.t('modal.no_releases'))}</div>`; updateModalNavButtons(); return; }
         const rel = ns.modal.modalReleases[index];
-        if(!rel){ releaseBody.innerHTML = `<div style="color:#ff6b6b">Release not found.</div>`; updateModalNavButtons(); return; }
+        if(!rel){ releaseBody.innerHTML = `<div style="color:#ff6b6b">${u.escapeHtml(ns.i18n.t('modal.release_not_found'))}</div>`; updateModalNavButtons(); return; }
         const title = rel.name || rel.tag_name || 'Release';
         const tag = rel.tag_name || '';
         const published = rel.published_at ? new Date(rel.published_at).toLocaleString() : '';
@@ -99,20 +112,20 @@ window.zp = window.zp || {};
                 }
                 assetsHtml += '</div>';
             } else {
-                assetsHtml = '<div style="opacity:0.75">Assets present but no downloadable URL available.</div>';
+                assetsHtml = `<div style="opacity:0.75">Assets present but no downloadable URL available.</div>`;
             }
         } else {
-            assetsHtml = '<div style="opacity:0.7">No release assets</div>';
+            assetsHtml = `<div style="opacity:0.7">No release assets</div>`;
         }
 
         releaseBody.innerHTML = `
             <div style="display:flex;gap:10px;align-items:center;justify-content:space-between;">
                 <div>
                     <div class="release-title" id="releaseTitle">${u.escapeHtml(title)}</div>
-                    <div class="release-meta">${u.escapeHtml(tag)} ${published ? '• Published ' + u.escapeHtml(published) : ''}</div>
+                    <div class="release-meta">${u.escapeHtml(tag)} ${published ? '• ' + u.escapeHtml(ns.i18n.t('modal.published')) + ' ' + u.escapeHtml(published) : ''}</div>
                 </div>
                 <div style="display:flex;gap:8px;align-items:center;">
-                    <button id="toggleCompareBtn" class="modal-copy-btn" title="Toggle release diff">Compare</button>
+                    <button id="toggleCompareBtn" class="modal-copy-btn" title="${u.escapeHtml(ns.i18n.t('modal.compare'))}">${u.escapeHtml(ns.i18n.t('modal.compare'))}</button>
                 </div>
             </div>
             <div class="release-body">${marked.parse(body)}</div>
@@ -145,12 +158,12 @@ window.zp = window.zp || {};
             compareMenuEl = document.createElement('div'); compareMenuEl.className = 'compare-menu';
             compareMenuEl.innerHTML = `
                 <div class="compare-menu-inner">
-                    <button class="compare-option" data-type="previous">Compare with previous release</button>
-                    <button class="compare-option" data-type="other">Compare with other tag…</button>
+                    <button class="compare-option" data-type="previous">${u.escapeHtml(ns.i18n.t('compare.previous'))}</button>
+                    <button class="compare-option" data-type="other">${u.escapeHtml(ns.i18n.t('compare.other'))}</button>
                     <div class="compare-other" style="display:none; margin-top:8px;">
-                        <input class="compare-other-input" placeholder="Enter base tag (e.g. v1.2.3)" />
-                        <button class="compare-other-go">Compare</button>
-                        <div class="compare-other-hint" style="margin-top:6px;font-size:12px;opacity:0.8">Press Enter to compare</div>
+                        <input class="compare-other-input" placeholder="${u.escapeHtml(ns.i18n.t('compare.other.placeholder'))}" />
+                        <button class="compare-other-go">${u.escapeHtml(ns.i18n.t('modal.compare'))}</button>
+                        <div class="compare-other-hint" style="margin-top:6px;font-size:12px;opacity:0.8">${u.escapeHtml(ns.i18n.t('compare.other.hint'))}</div>
                     </div>
                 </div>
             `;
@@ -177,11 +190,11 @@ window.zp = window.zp || {};
                 const currentIdx = ns.modal.modalReleaseIndex;
                 const older = ns.modal.modalReleases[currentIdx + 1];
                 if(!older || !older.tag_name){ ns.ui.showTooltip(toggleCompareBtn, `<div><strong>No previous release</strong></div><div>Cannot compute compare</div>`); setTimeout(ns.ui.hideTooltip, 1500); return; }
-                compareContainer.style.display = 'block'; compareContainer.innerHTML = `<div style="opacity:0.8">Loading compare…</div>`;
+                compareContainer.style.display = 'block'; compareContainer.innerHTML = `<div style="opacity:0.8">${u.escapeHtml(ns.i18n.t('modal.compare_loading'))}</div>`;
                 const cmp = await api.fetchReleaseCompare(ns.modal.modalCurrentRepo, older.tag_name, tag);
-                if(!cmp){ compareContainer.innerHTML = `<div style="color:#ff6b6b">Compare failed or unavailable.</div>`; return; }
+                if(!cmp){ compareContainer.innerHTML = `<div style="color:#ff6b6b">${u.escapeHtml(ns.i18n.t('modal.compare_failed'))}</div>`; return; }
                 if(cmp.__error === 'rate_limit'){ compareContainer.innerHTML = `<div style="color:#ffd89b">GitHub rate limited. Try again later.</div>`; return; }
-                if(!cmp.files || !cmp.files.length){ compareContainer.innerHTML = `<div style="opacity:0.8">No changed files between ${u.escapeHtml(older.tag_name)} and ${u.escapeHtml(tag)}</div>`; return; }
+                if(!cmp.files || !cmp.files.length){ compareContainer.innerHTML = `<div style="opacity:0.8">${u.escapeHtml(ns.i18n.t('modal.no_changed_files', [u.escapeHtml(older.tag_name), u.escapeHtml(tag)]))}</div>`; return; }
                 const filesHtml = cmp.files.map(f => `<div class="compare-file ${u.escapeHtml(f.status || '')}"><div class="filename">${u.escapeHtml(f.filename)}</div><div class="meta">${u.escapeHtml(f.status)} • +${f.additions} / -${f.deletions}</div></div>`).join('');
                 compareContainer.innerHTML = `<div class="compare-section"><div style="font-weight:700;margin-bottom:6px">Changed files (${cmp.files.length})</div>${filesHtml}</div>`;
             });
@@ -194,11 +207,11 @@ window.zp = window.zp || {};
             async function doOtherCompare(){
                 const baseTagRaw = otherInput.value && otherInput.value.trim();
                 if(!baseTagRaw){ otherInput.focus(); return; }
-                removeCompareMenu(); compareContainer.style.display = 'block'; compareContainer.innerHTML = `<div style="opacity:0.8">Loading compare…</div>`;
+                removeCompareMenu(); compareContainer.style.display = 'block'; compareContainer.innerHTML = `<div style="opacity:0.8">${u.escapeHtml(ns.i18n.t('modal.compare_loading'))}</div>`;
                 const cmp = await api.fetchReleaseCompare(ns.modal.modalCurrentRepo, baseTagRaw, tag);
-                if(!cmp){ compareContainer.innerHTML = `<div style="color:#ff6b6b">Compare failed or unavailable.</div>`; return; }
+                if(!cmp){ compareContainer.innerHTML = `<div style="color:#ff6b6b">${u.escapeHtml(ns.i18n.t('modal.compare_failed'))}</div>`; return; }
                 if(cmp.__error === 'rate_limit'){ compareContainer.innerHTML = `<div style="color:#ffd89b">GitHub rate limited. Try again later.</div>`; return; }
-                if(!cmp.files || !cmp.files.length){ compareContainer.innerHTML = `<div style="opacity:0.8">No changed files between ${u.escapeHtml(baseTagRaw)} and ${u.escapeHtml(tag)}</div>`; return; }
+                if(!cmp.files || !cmp.files.length){ compareContainer.innerHTML = `<div style="opacity:0.8">${u.escapeHtml(ns.i18n.t('modal.no_changed_files', [u.escapeHtml(baseTagRaw), u.escapeHtml(tag)]))}</div>`; return; }
                 const filesHtml = cmp.files.map(f => `<div class="compare-file ${u.escapeHtml(f.status || '')}"><div class="filename">${u.escapeHtml(f.filename)}</div><div class="meta">${u.escapeHtml(f.status)} • +${f.additions} / -${f.deletions}</div></div>`).join('');
                 compareContainer.innerHTML = `<div class="compare-section"><div style="font-weight:700;margin-bottom:6px">Changed files (${cmp.files.length})</div>${filesHtml}</div>`;
             }
@@ -234,7 +247,7 @@ window.zp = window.zp || {};
             return `<div class="month-block"><div class="month-label">${baseDate.toLocaleString(undefined,{month:'short'})}</div><div class="month-grid">${cells.join('')}</div></div>`;
         }
         const calendarHTML = months.map(m => buildMonthCalendar(m)).join('');
-        el.innerHTML = `<div class="ins-section"><div class="ins-title">Release Timeline</div><div class="timeline-pills">${timeline}</div></div><div class="ins-section"><div class="ins-title">Recent Release Calendar</div><div class="calendar-wrap">${calendarHTML}</div></div>`;
+        el.innerHTML = `<div class="ins-section"><div class="ins-title">${u.escapeHtml(ns.i18n.t('timeline.title'))}</div><div class="timeline-pills">${timeline}</div></div><div class="ins-section"><div class="ins-title">${u.escapeHtml(ns.i18n.t('calendar.title'))}</div><div class="calendar-wrap">${calendarHTML}</div></div>`;
         el.querySelectorAll('.timeline-pill').forEach(btn => { btn.addEventListener('click', () => { const i = parseInt(btn.dataset.idx,10); if(!isNaN(i)){ ns.modal.modalReleaseIndex = i; renderModalReleaseAt(i); } }); });
     }
 
@@ -251,7 +264,7 @@ window.zp = window.zp || {};
         const parsed = parseReleaseHash(location.hash); if(!parsed) return;
         const ghUrl = `https://github.com/${parsed.repo}`;
         const list = await api.fetchReleasesList(ghUrl);
-        if(!list || !list.length){ openModal(); if(list && list.__error === 'rate_limit') releaseBody.innerHTML = `<div style="color:#ffd89b">GitHub API rate limited. Please try again later.</div>`; else releaseBody.innerHTML = `<div style="color:#ff6b6b">No releases found for <b>${u.escapeHtml(parsed.repo)}</b>.</div>`; return; }
+        if(!list || !list.length){ openModal(); if(list && list.__error === 'rate_limit') releaseBody.innerHTML = `<div style="color:#ffd89b">${u.escapeHtml(ns.i18n.t('modal.loading_releases'))}</div>`; else releaseBody.innerHTML = `<div style="color:#ff6b6b">${u.escapeHtml(ns.i18n.t('modal.no_releases'))} <b>${u.escapeHtml(parsed.repo)}</b>.</div>`; return; }
         ns.modal.modalCurrentRepo = parsed.repo; ns.modal.modalReleases = list;
         const reqTag = parsed.tag || '';
         const norm = t => (t || '').toString().toLowerCase().replace(/^v/,'');
@@ -263,7 +276,7 @@ window.zp = window.zp || {};
             if(foundIdx !== -1) break;
         }
         openModal();
-        if(foundIdx === -1){ ns.modal.modalReleaseIndex = 0; renderModalReleaseAt(ns.modal.modalReleaseIndex); releaseBody.insertAdjacentHTML('afterbegin', `<div style="color:#ffb86b">Requested release <b>${u.escapeHtml(reqTag)}</b> not found; showing latest.</div>`); }
+        if(foundIdx === -1){ ns.modal.modalReleaseIndex = 0; renderModalReleaseAt(ns.modal.modalReleaseIndex); releaseBody.insertAdjacentHTML('afterbegin', `<div style="color:#ffb86b">${u.escapeHtml('Requested release ' + reqTag + ' not found; showing latest.')}</div>`); }
         else { ns.modal.modalReleaseIndex = foundIdx; renderModalReleaseAt(ns.modal.modalReleaseIndex); }
     }
     window.addEventListener('hashchange', () => { processReleaseHash(); });

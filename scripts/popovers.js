@@ -30,7 +30,7 @@ window.zp = window.zp || {};
                 <button class="contrib-popover-close" title="Close" aria-label="Close">✕</button>
             </div>
             <div class="contrib-popover-body">
-                <div class="contrib-loading">Loading contributors & activity…</div>
+                <div class="contrib-loading">${u.escapeHtml(ns.i18n.t('contrib.loading'))}</div>
             </div>
         </div>`;
         document.body.appendChild(popup);
@@ -48,7 +48,7 @@ window.zp = window.zp || {};
         window.addEventListener('resize', hideContribPopover);
 
         const body = popup.querySelector('.contrib-popover-body');
-        body.innerHTML = `<div class="contrib-loading">Loading contributors & activity…</div>`;
+        body.innerHTML = `<div class="contrib-loading">${u.escapeHtml(ns.i18n.t('contrib.loading'))}</div>`;
 
         let contribs = await api.fetchContributors(repoUrl, 12).catch(()=>null);
         let activity = await api.fetchCommitActivity(repoUrl).catch(()=>null);
@@ -56,7 +56,7 @@ window.zp = window.zp || {};
         if(contribs && contribs.__error === 'rate_limit'){
             body.innerHTML = `<div style="color:#ffd89b">GitHub API rate limited. Try again later or press Retry.</div><div style="margin-top:8px;"><button class="fetch-retry">Retry</button></div>`;
             body.querySelector('.fetch-retry').addEventListener('click', async () => {
-                body.innerHTML = `<div class="contrib-loading">Retrying…</div>`;
+                body.innerHTML = `<div class="contrib-loading">${u.escapeHtml(ns.i18n.t('contrib.loading'))}</div>`;
                 const reContribs = await api.fetchContributors(repoUrl, 12).catch(()=>null);
                 if(reContribs && !reContribs.__error){ contribs = reContribs; } else { body.innerHTML = `<div style="color:#ffd89b">Still rate limited — try later.</div>`; return; }
             });
@@ -70,7 +70,7 @@ window.zp = window.zp || {};
 
         const contribHtml = (contribs && contribs.length && !contribs.__error) ? contribs.slice(0,8).map(c => {
             return `<a class="contrib-avatar" href="${u.escapeHtml(c.html_url)}" target="_blank" rel="noopener" title="${u.escapeHtml(c.login)} — ${c.contributions} commits"><img src="${u.escapeHtml(c.avatar)}" alt="${u.escapeHtml(c.login)}" /></a>`;
-        }).join('') : `<div class="ins-no-contrib">No contributors data</div>`;
+        }).join('') : `<div class="ins-no-contrib">${u.escapeHtml(ns.i18n.t('contrib.no_contrib'))}</div>`;
 
         let sparkHtml = `<div class="ins-activity-placeholder">No activity</div>`;
         if(Array.isArray(activity) && activity.length){
@@ -85,7 +85,7 @@ window.zp = window.zp || {};
                 <div class="contrib-avatars">${contribHtml}</div>
                 <div class="contrib-activity">${sparkHtml}</div>
             </div>
-            <div class="contrib-meta"><small>Click avatar to view profile. Activity shows commits/week (≈last 12w).</small></div>
+            <div class="contrib-meta"><small>${u.escapeHtml(ns.i18n.t('contrib.activity_hint'))}</small></div>
         `;
     }
 
@@ -111,7 +111,7 @@ window.zp = window.zp || {};
         return { logos, versions };
     }
     function buildPlatformsHTML(platforms){
-        if(!Array.isArray(platforms) || platforms.length === 0) return '<div class="ins-no-contrib">No platforms provided</div>';
+        if(!Array.isArray(platforms) || platforms.length === 0) return `<div class="ins-no-contrib">${u.escapeHtml(ns.i18n.t('platform.loading'))}</div>`;
         return platforms.map(pRaw => {
             const p = normalizePlatformEntry(pRaw); if(!p) return '';
             const logosHtml = (p.logos && p.logos.length) ? p.logos.map(src => `<img class="platform-logo" src="${u.escapeHtml(src)}" alt="platform logo">`).join('') : '';
@@ -129,7 +129,7 @@ window.zp = window.zp || {};
                 <button class="platform-popover-close" title="Close" aria-label="Close">✕</button>
             </div>
             <div class="platform-popover-body">
-                <div class="platform-loading">Loading platforms…</div>
+                <div class="platform-loading">${u.escapeHtml(ns.i18n.t('platform.loading'))}</div>
             </div>
         </div>`;
         document.body.appendChild(popup);

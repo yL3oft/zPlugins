@@ -54,13 +54,75 @@ h1 img{height:64px;margin-bottom:10px;transition:filter .3s;}
 .dark-mode-toggle:hover{transform:scale(1.2);color:var(--accent);}
 body.light .dark-mode-toggle{color:#333;}
 
+/* Refresh button moved to bottom-right */
 .refresh-btn{
-  position:fixed;top:18px;left:18px;width:36px;height:36px;border-radius:999px;border:none;background:transparent;color:inherit;font-size:16px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;z-index:1000;transition:transform .15s,opacity .12s;
+  position:fixed;bottom:18px;right:18px;width:36px;height:36px;border-radius:999px;border:none;background:transparent;color:inherit;font-size:16px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;z-index:1000;transition:transform .15s,opacity .12s;
 }
 .refresh-btn:hover{transform:translateY(-3px);opacity:.95;}
 .refresh-btn.rotating{animation:rotate-anim .4s linear;}
 @keyframes rotate-anim{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 body.light .refresh-btn{color:#333;}
+
+/* Discord button placed at top-left (where refresh used to be) */
+.discord-btn{
+  position:fixed;
+  top:18px;
+  left:18px;
+  width:36px;
+  height:36px;
+  border-radius:999px;
+  border:none;
+  background:transparent;
+  color:inherit;
+  font-size:16px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  z-index:1000;
+  transition:transform .15s,opacity .12s;
+}
+.discord-btn:hover{transform:translateY(-3px);opacity:.95;}
+body.light .discord-btn{color:#333;}
+
+.github-top-btn{
+  position:fixed;
+  top:58px; /* below discord (18 + 36 + 4 padding) */
+  left:18px;
+  width:36px;
+  height:36px;
+  border-radius:999px;
+  border:none;
+  background:transparent;
+  color:inherit;
+  font-size:16px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  z-index:1000;
+  transition:transform .15s,opacity .12s;
+}
+.github-top-btn:hover{transform:translateY(-3px);opacity:.95;}
+body.light .github-top-btn{color:#333;}
+
+/* Language toggle wrapper (keeps small control near top-right) */
+.lang-toggle-wrap{
+  position:fixed;
+  top:22px;
+  right:64px; /* near dark-mode toggle */
+  z-index:1000;
+}
+.lang-toggle{
+  border:none;
+  background:transparent;
+  color:inherit;
+  padding:6px 8px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:700;
+}
+.lang-toggle:hover{background:rgba(255,255,255,0.02);transform:translateY(-3px);}
 
 /* Center the search wrapper horizontally while preserving its max-width */
 .search-wrapper{
