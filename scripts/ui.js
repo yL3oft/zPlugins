@@ -127,7 +127,7 @@ window.zp = window.zp || {};
         const desc = document.createElement('p'); desc.className='card-desc'; desc.textContent = info.description || '';
         inner.appendChild(desc);
 
-        const infoBtn = document.createElement('button'); infoBtn.className='check-info'; infoBtn.type='button'; infoBtn.setAttribute('aria-label','Last checked info');
+        const infoBtn = document.createElement('button'); infoBtn.className = 'check-info'; infoBtn.type='button'; infoBtn.setAttribute('aria-label','Last checked info');
         infoBtn.innerHTML = `<span class="dot" aria-hidden="true"></span>`;
         function showInfoTooltip(){
             const ghTs = infoBtn.dataset.ghChecked ? parseInt(infoBtn.dataset.ghChecked,10) : null;
@@ -144,7 +144,10 @@ window.zp = window.zp || {};
         inner.appendChild(infoBtn);
 
         const btns = document.createElement('div'); btns.className='btns';
-        const ON_DEV_CLICKABLE = new Set(['github','jenkins','javadocs','wiki']);
+        // NOTE: this set describes which button types are ALLOWED while on_dev.
+        // Removed 'wiki' so that wiki buttons are disabled like modrinth/spigot/hangar for on_dev projects.
+        const ON_DEV_CLICKABLE = new Set(['github','jenkins','javadocs']);
+
         function addBtn(href, label, opts = {}){
             if(!href) return;
             const isGhost = opts.ghost !== false;
@@ -288,7 +291,8 @@ window.zp = window.zp || {};
         loadGHStats();
 
         // Downloads aggregation
-        if(hasModrinthKey && downloadsSpan){
+        // Skip download checks entirely for projects marked on_dev.
+        if(hasModrinthKey && downloadsSpan && !isOnDev){
             const dlStatusSpan = u.createStatusSpan(statsRow);
             async function loadDownloads(){
                 u.setStatusLoading(dlStatusSpan, 'loading downloads…');
