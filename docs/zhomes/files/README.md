@@ -12,6 +12,7 @@ Directory Tree:
     ├── config.yml
     ├── menus/
     │   ├── menu-homes.yml
+    │   ├── small-homes-menu-example.yml
     └── languages/
         ├── de.yml
         ├── en.yml
@@ -22,5 +23,6 @@ Directory Tree:
         ├── pl.yml
         ├── pt-br.yml
         ├── ru.yml
+        └── zhcn.yml
 ```
 
