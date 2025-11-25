@@ -7,7 +7,7 @@ description: >-
 # Events
 
 {% hint style="info" %}
-You can see more detailed documentation about each holder and manager in the [JavaDocs](../../zhomes/developer-api/javadocs.md).
+You can see more detailed documentation about each holder and manager in the [JavaDocs](../../zhomes/api/javadocs.md).
 {% endhint %}
 
 ## SendTeleportRequestEvent
