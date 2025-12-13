@@ -36,7 +36,7 @@
     * [Getting Started](zhomes/api/getting-started.md)
     * [Events](zhomes/api/events.md)
     * [JavaDocs](zhomes/api/javadocs.md)
-* [zTPA](ztpa/README.md)
+* [zTPA (Discontinued)](ztpa/README.md)
   * [Commands & Permissions](ztpa/commands-and-permissions/README.md)
     * [/ztpa reload \<type>](ztpa/commands-and-permissions/ztpa-reload.md)
   * [Hooks](ztpa/hooks/README.md)

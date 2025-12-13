@@ -9,13 +9,13 @@ coverY: 0
 # zHomes
 
 {% hint style="warning" %}
-‎This wiki is made to explain the plugin as of version 2.2.1. If any of the config here is missing on your plugin, make sure your plugin is up-to-date, the plugin says when its up-to-date on its starts.
+‎This wiki is made to explain the plugin as of version 2.2.3. If any of the config here is missing on your plugin, make sure your plugin is up-to-date, the plugin says when its up-to-date on its starts.
 {% endhint %}
 
 ## Requirements
 
 * **Java 8 or above**
-* **Version 1.8 - Latest (1.21.10) \[Spigot, Paper, Purpur, Leaf]**
+* **Version 1.8 - Latest (1.21.11) \[Spigot, Paper, Purpur, Leaf]**
 * **Version 1.20 - Latest (1.21.8) \[Folia]**
 
 | Soft Depend                                                               | Use                                                                |

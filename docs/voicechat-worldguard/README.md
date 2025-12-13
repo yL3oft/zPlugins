@@ -5,7 +5,7 @@ description: Add custom WorldGuard flags for Simple Voice Chat
 # Voicechat WorldGuard
 
 {% hint style="warning" %}
-‎This wiki is made to explain the plugin as of version 1.0.0. If any of the config here is missing on your plugin, make sure your plugin is up-to-date, the plugin says when its up-to-date on its starts.
+‎This wiki is made to explain the plugin as of version 1.0.2. If any of the config here is missing on your plugin, make sure your plugin is up-to-date, the plugin says when its up-to-date on its starts.
 {% endhint %}
 
 ## Requirements
@@ -13,7 +13,7 @@ description: Add custom WorldGuard flags for Simple Voice Chat
 * **Java 17 or above**
 * **Simple Voice Chat 2.1.2 or above**
 * **WorldGuard (Installed & Working)**
-* **Version 1.8 - Latest (1.21.10) \[Spigot, Paper, Purpur, Pufferfish]**
+* **Version 1.8 - Latest (1.21.11) \[Spigot, Paper, Purpur, Pufferfish]**
 * **Version 1.20 - Latest (1.21.8) \[Folia]**
 
 ## Pages <a href="#pages" id="pages"></a>
