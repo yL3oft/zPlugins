@@ -36,6 +36,20 @@ body.light .badge-link.dev-badge:hover {
     box-shadow: 0 8px 24px rgba(126,58,255,0.06);
 }
 
+/* Archived (red) badge */
+.version.archived-badge {
+    background: rgba(255,89,89,0.12);
+    color: #ff5959;
+    border: 1px solid rgba(255,89,89,0.12);
+}
+.badge-link.archived-badge:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 24px rgba(255,89,89,0.12);
+}
+body.light .badge-link.archived-badge:hover {
+    box-shadow: 0 8px 24px rgba(255,58,58,0.06);
+}
+
 /* license pill */
 .license-pill{font-size:12px;padding:4px 8px;border-radius:999px;border:1px solid rgba(255,255,255,0.04);background:rgba(255,255,255,0.02);color:#dfefff;font-weight:700;margin-left:6px;display:inline-block;}
 body.light .license-pill{background:linear-gradient(145deg,#eef6ff,#f3f9ff);color:#0f1724;border:1px solid rgba(10,60,100,0.08);}
