@@ -100,6 +100,7 @@ window.zp = window.zp || {};
         if(document.body.classList.contains('light')) inner.classList.add('light-mode');
 
         const isOnDev = info && (info.on_dev === true || info['on_dev'] === true);
+        const isArchived = info && info.archived === true;
 
         const img = document.createElement('img'); img.className = 'card-logo'; img.alt = `${info.name || folderName} logo`;
         const darkCandidates = [`${folderName}/sources/darkmode/logo.svg`, `${folderName}/sources/darkmode/logo.png`];
@@ -116,7 +117,18 @@ window.zp = window.zp || {};
 
         const rightGroup = document.createElement('span'); rightGroup.style.display='inline-flex'; rightGroup.style.alignItems='center'; rightGroup.style.gap='6px';
         const versionBadge = document.createElement('span'); versionBadge.className='version badge-link'; versionBadge.dataset.version='';
-        if(isOnDev){ versionBadge.textContent = i18n.t('on_development'); versionBadge.classList.add('dev-badge'); versionBadge.dataset.version=''; versionBadge.title = i18n.t('on_development'); }
+        if(isArchived){ 
+            versionBadge.textContent = i18n.t('archived'); 
+            versionBadge.classList.add('archived-badge'); 
+            versionBadge.dataset.badgeType='archived';
+            versionBadge.title = i18n.t('archived'); 
+        }
+        else if(isOnDev){ 
+            versionBadge.textContent = i18n.t('on_development'); 
+            versionBadge.classList.add('dev-badge'); 
+            versionBadge.dataset.badgeType='on_dev';
+            versionBadge.title = i18n.t('on_development'); 
+        }
         else { versionBadge.textContent = i18n.t('loading'); versionBadge.title = i18n.t('modal.published'); }
         rightGroup.appendChild(versionBadge);
 
@@ -278,7 +290,7 @@ window.zp = window.zp || {};
         setTimeout(() => card.classList.add('show'), index * 120);
 
         // version + license + GH stats
-        if(!isOnDev && info.url){
+        if(!isOnDev && !isArchived && info.url){
             (async () => {
                 const repo = u.parseGitHubRepo(info.url);
                 if(!repo){ versionBadge.textContent = 'n/a'; return; }
@@ -296,7 +308,7 @@ window.zp = window.zp || {};
                     if(v) versionBadge.dataset.version = v;
                 } catch(err){ console.warn('Could not load latest release for', info.url, err); versionBadge.textContent = 'n/a'; }
             })();
-        } else if(!info.url && !isOnDev) versionBadge.textContent = '—';
+        } else if(!info.url && !isOnDev && !isArchived) versionBadge.textContent = '—';
 
         if(info.url){
             (async () => {
@@ -350,8 +362,8 @@ window.zp = window.zp || {};
         loadGHStats();
 
         // Downloads aggregation
-        // Skip download checks entirely for projects marked on_dev.
-        if(hasModrinthKey && downloadsSpan && !isOnDev){
+        // Skip download checks entirely for projects marked on_dev or archived.
+        if(hasModrinthKey && downloadsSpan && !isOnDev && !isArchived){
             const dlStatusSpan = u.createStatusSpan(statsRow);
             async function loadDownloads(){
                 u.setStatusLoading(dlStatusSpan, 'loading downloads…');
@@ -399,7 +411,7 @@ window.zp = window.zp || {};
         }
 
         // version badge click -> modal
-        if(!isOnDev){
+        if(!isOnDev && !isArchived){
             versionBadge.style.cursor = 'pointer';
             versionBadge.addEventListener('click', async () => {
                 if(!info.url) return;
@@ -423,6 +435,11 @@ window.zp = window.zp || {};
                 if(activeTag){ const encoded = encodeURIComponent(activeTag); const newPath = `${location.pathname}${location.search}#release:${ns.modal.modalCurrentRepo}:${encoded}`; history.replaceState(null,'',newPath); }
                 ns.modal.renderModalReleaseAt(ns.modal.modalReleaseIndex);
             });
+        } else if(isArchived) {
+            versionBadge.style.cursor = 'default';
+            const vHtml = `<div><strong>${u.escapeHtml(ns.i18n.t('archived'))}</strong></div><div>${u.escapeHtml(ns.i18n.t('archived_tooltip'))}</div>`;
+            versionBadge.addEventListener('mouseenter', () => showTooltip(versionBadge, vHtml));
+            versionBadge.addEventListener('mouseleave', hideTooltip);
         } else {
             versionBadge.style.cursor = 'default';
             const vHtml = `<div><strong>${u.escapeHtml(ns.i18n.t('on_development'))}</strong></div><div>${u.escapeHtml(ns.i18n.t('on_development'))} — no release badge shown.</div>`;
@@ -447,6 +464,18 @@ window.zp = window.zp || {};
             const pt = descEl.dataset.descPt || '';
             const en = descEl.dataset.desc || '';
             descEl.textContent = (ns.i18n && ns.i18n.current === 'pt-BR' && pt && pt.trim()) ? pt : en;
+            
+            // Update badge text for on_dev and archived badges
+            const badge = card.querySelector('.version.badge-link');
+            if(badge && badge.dataset.badgeType){
+                if(badge.dataset.badgeType === 'archived'){
+                    badge.textContent = ns.i18n.t('archived');
+                    badge.title = ns.i18n.t('archived');
+                } else if(badge.dataset.badgeType === 'on_dev'){
+                    badge.textContent = ns.i18n.t('on_development');
+                    badge.title = ns.i18n.t('on_development');
+                }
+            }
         });
     });
 
