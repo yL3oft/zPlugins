@@ -117,8 +117,20 @@ window.zp = window.zp || {};
 
         const rightGroup = document.createElement('span'); rightGroup.style.display='inline-flex'; rightGroup.style.alignItems='center'; rightGroup.style.gap='6px';
         const versionBadge = document.createElement('span'); versionBadge.className='version badge-link'; versionBadge.dataset.version='';
-        if(isArchived){ versionBadge.textContent = i18n.t('archived'); versionBadge.classList.add('archived-badge'); versionBadge.dataset.version=''; versionBadge.title = i18n.t('archived'); }
-        else if(isOnDev){ versionBadge.textContent = i18n.t('on_development'); versionBadge.classList.add('dev-badge'); versionBadge.dataset.version=''; versionBadge.title = i18n.t('on_development'); }
+        if(isArchived){ 
+            versionBadge.textContent = i18n.t('archived'); 
+            versionBadge.classList.add('archived-badge'); 
+            versionBadge.dataset.version=''; 
+            versionBadge.dataset.badgeType='archived';
+            versionBadge.title = i18n.t('archived'); 
+        }
+        else if(isOnDev){ 
+            versionBadge.textContent = i18n.t('on_development'); 
+            versionBadge.classList.add('dev-badge'); 
+            versionBadge.dataset.version=''; 
+            versionBadge.dataset.badgeType='on_dev';
+            versionBadge.title = i18n.t('on_development'); 
+        }
         else { versionBadge.textContent = i18n.t('loading'); versionBadge.title = i18n.t('modal.published'); }
         rightGroup.appendChild(versionBadge);
 
@@ -175,20 +187,16 @@ window.zp = window.zp || {};
         // NOTE: this set describes which button types are ALLOWED while on_dev.
         // Removed 'wiki' so that wiki buttons are disabled like modrinth/spigot/hangar for on_dev projects.
         const ON_DEV_CLICKABLE = new Set(['github','jenkins','javadocs']);
-        // For archived projects, we disable download links but allow information/documentation links
-        const ARCHIVED_CLICKABLE = new Set(['github','jenkins','javadocs','wiki','bstats']);
 
         function addBtn(href, label, opts = {}){
             if(!href) return;
             const isGhost = opts.ghost !== false;
             const btnType = opts.btnClass || (label.toLowerCase().includes('javadoc') ? 'javadocs' : label.toLowerCase());
             const isAllowedWhileDev = ON_DEV_CLICKABLE.has(btnType);
-            const isAllowedWhileArchived = ARCHIVED_CLICKABLE.has(btnType);
-            if((isOnDev && !isAllowedWhileDev) || (isArchived && !isAllowedWhileArchived)){
+            if(isOnDev && !isAllowedWhileDev){
                 const a = document.createElement('a'); a.className = 'btn' + (isGhost ? ' ghost' : ' primary'); a.classList.add('dev-disabled');
                 if(opts.btnClass) a.classList.add(opts.btnClass);
-                const statusText = isArchived ? ns.i18n.t('archived') : ns.i18n.t('on_development');
-                a.setAttribute('aria-disabled','true'); a.setAttribute('role','button'); a.tabIndex = 0; a.title = `${label} (${statusText})`;
+                a.setAttribute('aria-disabled','true'); a.setAttribute('role','button'); a.tabIndex = 0; a.title = `${label} (${ns.i18n.t('on_development')})`;
                 if(opts.iconSrc){
                     const iconImg = document.createElement('img'); iconImg.className='btn-icon'; if(opts.iconClass) iconImg.classList.add(opts.iconClass);
                     // try to wire light/dark variants automatically when icon looks like sources/global/<name>
@@ -210,8 +218,7 @@ window.zp = window.zp || {};
                     const iconSpan = document.createElement('span'); iconSpan.className='btn-icon-text'; iconSpan.textContent = opts.iconText; a.appendChild(iconSpan);
                 }
                 const span = document.createElement('span'); span.textContent = label; a.appendChild(span);
-                const tooltipKey = isArchived ? 'disabled_archived_tooltip' : 'disabled_dev_tooltip';
-                const tooltipHtml = `<div><strong>${label}</strong></div><div>${u.escapeHtml(ns.i18n.t(tooltipKey, [label]))}</div>`;
+                const tooltipHtml = `<div><strong>${label}</strong></div><div>${u.escapeHtml(ns.i18n.t('disabled_dev_tooltip', [label]))}</div>`;
                 a.addEventListener('mouseenter', () => showTooltip(a, tooltipHtml)); a.addEventListener('mouseleave', hideTooltip);
                 a.addEventListener('focus', () => showTooltip(a, tooltipHtml)); a.addEventListener('blur', hideTooltip);
                 a.addEventListener('click', (e) => { e.preventDefault(); showTooltip(a, tooltipHtml); setTimeout(hideTooltip, 1800); });
@@ -459,6 +466,18 @@ window.zp = window.zp || {};
             const pt = descEl.dataset.descPt || '';
             const en = descEl.dataset.desc || '';
             descEl.textContent = (ns.i18n && ns.i18n.current === 'pt-BR' && pt && pt.trim()) ? pt : en;
+            
+            // Update badge text for on_dev and archived badges
+            const badge = card.querySelector('.version.badge-link');
+            if(badge && badge.dataset.badgeType){
+                if(badge.dataset.badgeType === 'archived'){
+                    badge.textContent = ns.i18n.t('archived');
+                    badge.title = ns.i18n.t('archived');
+                } else if(badge.dataset.badgeType === 'on_dev'){
+                    badge.textContent = ns.i18n.t('on_development');
+                    badge.title = ns.i18n.t('on_development');
+                }
+            }
         });
     });
 
