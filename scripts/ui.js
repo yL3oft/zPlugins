@@ -100,7 +100,7 @@ window.zp = window.zp || {};
         if(document.body.classList.contains('light')) inner.classList.add('light-mode');
 
         const isOnDev = info && (info.on_dev === true || info['on_dev'] === true);
-        const isArchived = info && (info.archived === true || info['archived'] === true);
+        const isArchived = info && info.archived === true;
 
         const img = document.createElement('img'); img.className = 'card-logo'; img.alt = `${info.name || folderName} logo`;
         const darkCandidates = [`${folderName}/sources/darkmode/logo.svg`, `${folderName}/sources/darkmode/logo.png`];
