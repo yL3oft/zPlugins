@@ -432,7 +432,7 @@ window.zp = window.zp || {};
             });
         } else if(isArchived) {
             versionBadge.style.cursor = 'default';
-            const vHtml = `<div><strong>${u.escapeHtml(ns.i18n.t('archived'))}</strong></div><div>${u.escapeHtml(ns.i18n.t('archived'))} — no release badge shown.</div>`;
+            const vHtml = `<div><strong>${u.escapeHtml(ns.i18n.t('archived'))}</strong></div><div>${u.escapeHtml(ns.i18n.t('archived_tooltip'))}</div>`;
             versionBadge.addEventListener('mouseenter', () => showTooltip(versionBadge, vHtml));
             versionBadge.addEventListener('mouseleave', hideTooltip);
         } else {
