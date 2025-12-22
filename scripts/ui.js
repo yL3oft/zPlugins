@@ -120,14 +120,12 @@ window.zp = window.zp || {};
         if(isArchived){ 
             versionBadge.textContent = i18n.t('archived'); 
             versionBadge.classList.add('archived-badge'); 
-            versionBadge.dataset.version=''; 
             versionBadge.dataset.badgeType='archived';
             versionBadge.title = i18n.t('archived'); 
         }
         else if(isOnDev){ 
             versionBadge.textContent = i18n.t('on_development'); 
             versionBadge.classList.add('dev-badge'); 
-            versionBadge.dataset.version=''; 
             versionBadge.dataset.badgeType='on_dev';
             versionBadge.title = i18n.t('on_development'); 
         }
