@@ -8,12 +8,12 @@
   * [Creating Custom Commands](zapi/commands-and-subcommands.md)
   * [Using the Logger](zapi/using-logger.md)
   * [JavaDocs](zapi/javadocs.md)
-  * [Inventories]
+  * [Inventories](zapi/inventories/README.md)
     * [Creating Custom Inventories](zapi/inventories/creating-inventories.md)
     * [Inventory Configuration Structure](zapi/inventories/inventory-config-structure.md)
-  * [Items]
+  * [Items](zapi/items/README.md)
     * [Creating Custom Items](zapi/items/creating-custom-items.md)
-  * [Utilities]
+  * [Utilities](zapi/utilities/README.md)
     * [Mathematical Expressions](zapi/utilities/math-expressions.md)
 * [zHomes](zhomes/README.md)
   * [Commands & Permissions](zhomes/commands-and-permissions/README.md)
