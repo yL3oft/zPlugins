@@ -20,12 +20,22 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Main extends JavaPlugin {
 
-    public final String pluginName = getDescription().getName();
-    public final String coloredPluginName = this.pluginName; // Change to whatever you want
-
+    @Override
+    public void onLoad() {
+        zAPI.setPlugin(this);
+        logger = new Logger("[" + getPluginMeta().getDescription() + "]");
+        zAPI.setPluginLogger(logger);
+        zAPI.preload(this);
+    }
+    
     @Override
     public void onEnable() {
-        zAPI.init(this, pluginName, coloredPluginName, null);
+        zAPI.init(this);
+    }
+    
+    @Override
+    public void onDisable() {
+        zAPI.disable();
     }
 
 }
@@ -38,11 +48,11 @@ So if you want to access everything zAPI has to offer, you will need to use NBTA
 After you got NBTAPI setup, change this line from [#raw-initialization](initializing.md#raw-initialization "mention"):
 
 ```java
-zAPI.init(this, pluginName, coloredPluginName, null);
+zAPI.init(this);
 ```
 
 To this:
 
 ```java
-zAPI.init(this, pluginName, coloredPluginName, NBT.preloadApi());
+zAPI.init(this, NBT.preloadApi());
 ```
