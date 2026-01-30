@@ -1,0 +1,19 @@
+{
+  "name": "InventoryRollbackPlus Folia",
+  "description": "Adds support for Folia to InventoryRollbackPlus.",
+  "description_pt": "Adiciona suporte ao Folia para o InventoryRollbackPlus.",
+  "url": "https://github.com/yL3oft/Inventory-Rollback-Plus-Folia",
+  "jenkins": "",
+  "wiki": "https://github.com/yL3oft/Inventory-Rollback-Plus-Folia/blob/main/README.md",
+  "modrinth": "",
+  "spigot": "",
+  "hangar": "",
+  "bstats-id": 9437,
+  "fork": true,
+  "forked-project": {
+    "name": "InventoryRollbackPlus",
+    "description": "Spigot/Bukkit plugin that allows server moderators to restore player items and data from backups.",
+    "description_pt": "Plugin Spigot/Bukkit que permite aos moderadores do servidor restaurar itens e dados dos jogadores a partir de backups.",
+    "url": "https://github.com/TechnicallyCoded/Inventory-Rollback-Plus"
+  }
+}

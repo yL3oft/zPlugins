@@ -44,7 +44,12 @@ window.zp = window.zp || {};
             'timeline.title': 'Release Timeline',
             'calendar.title': 'Recent Release Calendar',
             'lang.en': 'EN',
-            'lang.pt': 'PT'
+            'lang.pt': 'PT',
+            'fork.badge': 'Forked',
+            'fork.info_title': 'Original Project',
+            'fork.view_original': 'View Original',
+            'fork.expand': 'Show fork info',
+            'fork.collapse': 'Hide fork info',
         },
         'pt-BR': {
             brand: 'Projetos yLeoft',
@@ -88,7 +93,12 @@ window.zp = window.zp || {};
             'timeline.title': 'Linha do tempo de versões',
             'calendar.title': 'Calendário recente de versões',
             'lang.en': 'EN',
-            'lang.pt': 'PT‑BR'
+            'lang.pt': 'PT‑BR',
+            'fork.badge': 'Bifurcado',
+            'fork.info_title': 'Projeto Original',
+            'fork.view_original': 'Ver Original',
+            'fork.expand': 'Mostrar info do fork',
+            'fork.collapse': 'Esconder info do fork'
         }
     };
 

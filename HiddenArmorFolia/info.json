@@ -1,0 +1,18 @@
+{
+  "name": "HiddenArmor Folia",
+  "description": "Adds support for Folia to HiddenArmor.",
+  "description_pt": "Adiciona suporte ao Folia para o HiddenArmor.",
+  "url": "https://github.com/yL3oft/HiddenArmor-Folia",
+  "jenkins": "",
+  "wiki": "https://github.com/yL3oft/HiddenArmor-Folia/blob/master/README.md",
+  "modrinth": "",
+  "spigot": "",
+  "hangar": "",
+  "fork": true,
+  "forked-project": {
+    "name": "HiddenArmor",
+    "description": "Toggle armor visibility using packets.",
+    "description_pt": "Ativa ou desativa a visibilidade da armadura usando pacotes.",
+    "url": "https://github.com/Kteq1/HiddenArmor"
+  }
+}

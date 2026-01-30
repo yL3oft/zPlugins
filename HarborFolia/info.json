@@ -1,0 +1,19 @@
+{
+  "name": "Harbor Folia",
+  "description": "Adds support for Folia to Harbor.",
+  "description_pt": "Adiciona suporte ao Folia para o Harbor.",
+  "url": "https://github.com/yL3oft/harbor-Folia",
+  "jenkins": "",
+  "wiki": "https://github.com/nkomarn/harbor/wiki",
+  "modrinth": "",
+  "spigot": "",
+  "hangar": "",
+  "bstats-id": 4958,
+  "fork": true,
+  "forked-project": {
+    "name": "Harbor",
+    "description": "Harbor is a plugin that redefines sleep within your Spigot server! Harbor is lightweight and performant, with just the right amount of features for any survival server!",
+    "description_pt": "Harbor é um plugin que redefine o sono dentro do seu servidor Spigot! Harbor é leve e eficiente, com a quantidade certa de recursos para qualquer servidor de sobrevivência!",
+    "url": "https://github.com/nkomarn/harbor"
+  }
+}

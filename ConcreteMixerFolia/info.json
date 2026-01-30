@@ -1,0 +1,19 @@
+{
+  "name": "ConcreteMixer Folia",
+  "description": "Adds support for Folia to ConcreteMixer.",
+  "description_pt": "Adiciona suporte ao Folia para o ConcreteMixer.",
+  "url": "https://github.com/yL3oft/ConcreteMixer-Folia",
+  "jenkins": "",
+  "wiki": "https://modrinth.com/plugin/concretemixer",
+  "modrinth": "",
+  "spigot": "",
+  "hangar": "",
+  "bstats-id": 15590,
+  "fork": true,
+  "forked-project": {
+    "name": "ConcreteMixer",
+    "description": "Throw in powder... get concrete! ",
+    "description_pt": "Jogue cimento... obtenha concreto!",
+    "url": "https://github.com/LeafCommunity/ConcreteMixer"
+  }
+}

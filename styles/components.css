@@ -81,3 +81,138 @@ body.light .stat-tooltip{background:linear-gradient(180deg,#fff,#fbfbff);color:#
 /* highlight */
 mark{background-color:var(--accent);color:#fff;padding:0 1px;border-radius:3px;box-shadow:0 0 4px rgba(78,163,255,0.5);transition:background-color .3s,color .3s;}
 body.light mark{background-color:#0077cc;}
+/* Fork (orange) badge */
+.version.fork-badge {
+    background: rgba(255,152,0,0.12);
+    color: #ff9800;
+    border: 1px solid rgba(255,152,0,0.12);
+}
+.badge-link.fork-badge:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 24px rgba(255,152,0,0.12);
+}
+body.light .badge-link.fork-badge:hover {
+    box-shadow: 0 8px 24px rgba(255,152,0,0.06);
+}
+
+/* Fork info expandable section */
+.fork-info-section {
+    margin-top: 12px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 12px;
+}
+body.light .fork-info-section {
+    border-top-color: rgba(0,0,0,0.08);
+}
+
+.fork-info-toggle {
+    width: 100%;
+    background: rgba(255,152,0,0.04);
+    border: 1px solid rgba(255,152,0,0.08);
+    color: #ff9800;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all .15s;
+}
+.fork-info-toggle:hover {
+    background: rgba(255,152,0,0.08);
+    transform: translateY(-2px);
+}
+body.light .fork-info-toggle {
+    background: rgba(255,152,0,0.06);
+    border-color: rgba(255,152,0,0.12);
+    color: #e65100;
+}
+body.light .fork-info-toggle:hover {
+    background: rgba(255,152,0,0.12);
+}
+
+.fork-info-toggle-icon {
+    font-size: 12px;
+    transition: transform .2s;
+}
+.fork-info-toggle.expanded .fork-info-toggle-icon {
+    transform: rotate(180deg);
+}
+
+.fork-info-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .3s ease-out, opacity .3s;
+    opacity: 0;
+}
+.fork-info-content.expanded {
+    max-height: 400px;
+    opacity: 1;
+    margin-top: 12px;
+}
+
+.fork-info-box {
+    background: rgba(255,152,0,0.03);
+    border: 1px solid rgba(255,152,0,0.08);
+    border-radius: 8px;
+    padding: 12px;
+    text-align: left;
+}
+body.light .fork-info-box {
+    background: rgba(255,152,0,0.04);
+    border-color: rgba(255,152,0,0.12);
+}
+
+.fork-info-title {
+    font-weight: 700;
+    font-size: 14px;
+    color: #ff9800;
+    margin-bottom: 8px;
+}
+body.light .fork-info-title {
+    color: #e65100;
+}
+
+.fork-info-name {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.fork-info-desc {
+    font-size: 13px;
+    color: #bfcfff;
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+body.light .fork-info-desc {
+    color: #5a5a5a;
+}
+
+.fork-info-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: linear-gradient(180deg, rgba(255,152,0,0.12), rgba(255,152,0,0.08));
+    border: 1px solid rgba(255,152,0,0.12);
+    border-radius: 6px;
+    color: #ff9800;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 13px;
+    transition: all .15s;
+}
+.fork-info-link:hover {
+    background: rgba(255,152,0,0.16);
+    transform: translateY(-2px);
+}
+body.light .fork-info-link {
+    background: linear-gradient(180deg, rgba(255,152,0,0.14), rgba(255,152,0,0.10));
+    color: #e65100;
+}
+body.light .fork-info-link:hover {
+    background: rgba(255,152,0,0.20);
+}

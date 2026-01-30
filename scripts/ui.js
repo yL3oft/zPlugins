@@ -117,17 +117,27 @@ window.zp = window.zp || {};
 
         const rightGroup = document.createElement('span'); rightGroup.style.display='inline-flex'; rightGroup.style.alignItems='center'; rightGroup.style.gap='6px';
         const versionBadge = document.createElement('span'); versionBadge.className='version badge-link'; versionBadge.dataset.version='';
-        if(isArchived){ 
-            versionBadge.textContent = i18n.t('archived'); 
-            versionBadge.classList.add('archived-badge'); 
+
+        // Check if this is a fork project
+        const isFork = info && info.fork === true;
+
+        if(isArchived){
+            versionBadge.textContent = i18n.t('archived');
+            versionBadge.classList.add('archived-badge');
             versionBadge.dataset.badgeType='archived';
-            versionBadge.title = i18n.t('archived'); 
+            versionBadge.title = i18n.t('archived');
         }
-        else if(isOnDev){ 
-            versionBadge.textContent = i18n.t('on_development'); 
-            versionBadge.classList.add('dev-badge'); 
+        else if(isOnDev){
+            versionBadge.textContent = i18n.t('on_development');
+            versionBadge.classList.add('dev-badge');
             versionBadge.dataset.badgeType='on_dev';
-            versionBadge.title = i18n.t('on_development'); 
+            versionBadge.title = i18n.t('on_development');
+        }
+        else if(isFork){
+            versionBadge.textContent = i18n.t('fork.badge');
+            versionBadge.classList.add('fork-badge');
+            versionBadge.dataset.badgeType='fork';
+            versionBadge.title = i18n.t('fork.badge');
         }
         else { versionBadge.textContent = i18n.t('loading'); versionBadge.title = i18n.t('modal.published'); }
         rightGroup.appendChild(versionBadge);
@@ -256,11 +266,27 @@ window.zp = window.zp || {};
         addBtn(info.url, 'GitHub', { iconSrc: 'sources/global/github.svg', btnClass: 'github' });
         addBtn(info.jenkins, 'Jenkins', { iconSrc: 'sources/global/jenkins.svg', btnClass: 'jenkins' });
 
-        // Javadocs: only show if info.javadocs is NOT explicitly false.
+        // Javadocs: only show if info.javadocs is NOT explicitly false AND directory exists
         // If info.javadocs is a non-empty string, use it as the URL; otherwise fall back to default folder path.
         if(info.javadocs !== false){
             const javadocUrl = (typeof info.javadocs === 'string' && info.javadocs.trim() !== '') ? info.javadocs : `${folderName}/javadocs/`;
-            addBtn(javadocUrl, 'Javadocs', { iconText: '📚', btnClass: 'javadocs' });
+
+            // Check if javadocs directory exists (only for default paths, not custom URLs)
+            if(typeof info.javadocs === 'string' && (info.javadocs.startsWith('http://') || info.javadocs.startsWith('https://'))){
+                // External URL - show button directly
+                addBtn(javadocUrl, 'Javadocs', { iconText: '📚', btnClass: 'javadocs' });
+            } else {
+                // Local path - check if directory exists
+                fetch(javadocUrl, { method: 'HEAD' })
+                    .then(response => {
+                        if(response.ok || response.status === 403) { // 403 might be directory listing disabled
+                            addBtn(javadocUrl, 'Javadocs', { iconText: '📚', btnClass: 'javadocs' });
+                        }
+                    })
+                    .catch(() => {
+                        // Directory doesn't exist or not accessible - don't show button
+                    });
+            }
         }
 
         if(info['bstats-id']){
@@ -297,16 +323,24 @@ window.zp = window.zp || {};
                 const cachedReleases = u.getCached(`gh:releases:${repo.owner}/${repo.repo}`);
                 if(cachedReleases && Array.isArray(cachedReleases) && cachedReleases.length){
                     const v = cachedReleases[0].tag_name || cachedReleases[0].name || null;
-                    versionBadge.textContent = v ? `v${v.replace(/^v/i,'')}` : 'n/a';
+                    if(isFork){
+                        versionBadge.textContent = v ? `${i18n.t('fork.badge')} v${v.replace(/^v/i,'')}` : i18n.t('fork.badge');
+                    } else {
+                        versionBadge.textContent = v ? `v${v.replace(/^v/i,'')}` : 'n/a';
+                    }
                     if(v) versionBadge.dataset.version = v;
                     return;
                 }
                 try {
                     const latest = await api.fetchLatestReleaseObject(info.url);
                     const v = latest ? (latest.tag_name || latest.name || null) : null;
-                    versionBadge.textContent = v ? `v${v.replace(/^v/i,'')}` : 'n/a';
+                    if(isFork){
+                        versionBadge.textContent = v ? `${i18n.t('fork.badge')} v${v.replace(/^v/i,'')}` : i18n.t('fork.badge');
+                    } else {
+                        versionBadge.textContent = v ? `v${v.replace(/^v/i,'')}` : 'n/a';
+                    }
                     if(v) versionBadge.dataset.version = v;
-                } catch(err){ console.warn('Could not load latest release for', info.url, err); versionBadge.textContent = 'n/a'; }
+                } catch(err){ console.warn('Could not load latest release for', info.url, err); versionBadge.textContent = isFork ? i18n.t('fork.badge') : 'n/a'; }
             })();
         } else if(!info.url && !isOnDev && !isArchived) versionBadge.textContent = '—';
 
@@ -447,6 +481,102 @@ window.zp = window.zp || {};
             versionBadge.addEventListener('mouseleave', hideTooltip);
         }
 
+        // Fork info section (if project is a fork)
+        if(isFork && info['forked-project']){
+            const forkSection = document.createElement('div');
+            forkSection.className = 'fork-info-section';
+
+            const forkToggle = document.createElement('button');
+            forkToggle.className = 'fork-info-toggle';
+            forkToggle.setAttribute('aria-expanded', 'false');
+            forkToggle.innerHTML = `
+                <span>${u.escapeHtml(i18n.t('fork.expand'))}</span>
+                <span class="fork-info-toggle-icon">▼</span>
+            `;
+
+            const forkContent = document.createElement('div');
+            forkContent.className = 'fork-info-content';
+
+            const forkBox = document.createElement('div');
+            forkBox.className = 'fork-info-box';
+
+            const forkTitle = document.createElement('div');
+            forkTitle.className = 'fork-info-title';
+            forkTitle.textContent = i18n.t('fork.info_title');
+
+            const forkName = document.createElement('div');
+            forkName.className = 'fork-info-name';
+            forkName.textContent = info['forked-project'].name || '';
+
+            const forkDesc = document.createElement('div');
+            forkDesc.className = 'fork-info-desc';
+            const currentLang = (ns.i18n && ns.i18n.current) || 'en';
+            const descText = (currentLang === 'pt-BR' && info['forked-project'].description_pt)
+                ? info['forked-project'].description_pt
+                : (info['forked-project'].description || '');
+            forkDesc.textContent = descText;
+            forkDesc.dataset.descEn = info['forked-project'].description || '';
+            forkDesc.dataset.descPt = info['forked-project'].description_pt || '';
+
+            forkBox.appendChild(forkTitle);
+            forkBox.appendChild(forkName);
+            forkBox.appendChild(forkDesc);
+
+            // Add license pill if specified
+            if(info['forked-project'].license){
+                const forkLicenseWrap = document.createElement('div');
+                forkLicenseWrap.style.marginTop = '8px';
+                forkLicenseWrap.style.marginBottom = '8px';
+
+                const forkLicensePill = document.createElement('span');
+                forkLicensePill.className = 'license-pill';
+                forkLicensePill.textContent = info['forked-project'].license;
+                forkLicensePill.title = `Original project license: ${info['forked-project'].license}`;
+
+                forkLicenseWrap.appendChild(forkLicensePill);
+                forkBox.appendChild(forkLicenseWrap);
+            }
+
+            if(info['forked-project'].url){
+                const forkLink = document.createElement('a');
+                forkLink.className = 'fork-info-link';
+                forkLink.href = info['forked-project'].url;
+                forkLink.target = '_blank';
+                forkLink.rel = 'noopener noreferrer';
+                forkLink.innerHTML = `
+                    <span>${u.escapeHtml(i18n.t('fork.view_original'))}</span>
+                    <span>→</span>
+                `;
+                forkBox.appendChild(forkLink);
+            }
+
+            forkContent.appendChild(forkBox);
+            forkSection.appendChild(forkToggle);
+            forkSection.appendChild(forkContent);
+            inner.appendChild(forkSection);
+
+            // Toggle functionality
+            forkToggle.addEventListener('click', () => {
+                const isExpanded = forkToggle.getAttribute('aria-expanded') === 'true';
+                if(isExpanded){
+                    forkToggle.setAttribute('aria-expanded', 'false');
+                    forkToggle.classList.remove('expanded');
+                    forkContent.classList.remove('expanded');
+                    forkToggle.querySelector('span:first-child').textContent = i18n.t('fork.expand');
+                } else {
+                    forkToggle.setAttribute('aria-expanded', 'true');
+                    forkToggle.classList.add('expanded');
+                    forkContent.classList.add('expanded');
+                    forkToggle.querySelector('span:first-child').textContent = i18n.t('fork.collapse');
+                }
+            });
+
+            // Store reference for language change updates
+            card.dataset.hasForkInfo = 'true';
+            card._forkDescEl = forkDesc;
+            card._forkToggle = forkToggle;
+        }
+
         contribToggle.addEventListener('click', (e) => {
             e.stopPropagation();
             if(!info.url){ showTooltip(contribToggle, `<div><strong>No repository</strong></div><div>Contributors unavailable</div>`); setTimeout(hideTooltip, 1400); return; }
@@ -460,12 +590,13 @@ window.zp = window.zp || {};
     document.addEventListener('zp:langchange', () => {
         document.querySelectorAll('.card').forEach(card => {
             const descEl = card.querySelector('.card-desc');
-            if(!descEl) return;
-            const pt = descEl.dataset.descPt || '';
-            const en = descEl.dataset.desc || '';
-            descEl.textContent = (ns.i18n && ns.i18n.current === 'pt-BR' && pt && pt.trim()) ? pt : en;
-            
-            // Update badge text for on_dev and archived badges
+            if(descEl){
+                const pt = descEl.dataset.descPt || '';
+                const en = descEl.dataset.desc || '';
+                descEl.textContent = (ns.i18n && ns.i18n.current === 'pt-BR' && pt && pt.trim()) ? pt : en;
+            }
+
+            // Update badge text for on_dev, archived, and fork badges
             const badge = card.querySelector('.version.badge-link');
             if(badge && badge.dataset.badgeType){
                 if(badge.dataset.badgeType === 'archived'){
@@ -474,7 +605,36 @@ window.zp = window.zp || {};
                 } else if(badge.dataset.badgeType === 'on_dev'){
                     badge.textContent = ns.i18n.t('on_development');
                     badge.title = ns.i18n.t('on_development');
+                } else if(badge.dataset.badgeType === 'fork'){
+                    const version = badge.dataset.version;
+                    if(version){
+                        badge.textContent = `${ns.i18n.t('fork.badge')} v${version.replace(/^v/i,'')}`;
+                    } else {
+                        badge.textContent = ns.i18n.t('fork.badge');
+                    }
+                    badge.title = ns.i18n.t('fork.badge');
                 }
+            }
+
+            // Update fork info section if present
+            if(card.dataset.hasForkInfo === 'true' && card._forkDescEl && card._forkToggle){
+                const forkDesc = card._forkDescEl;
+                const pt = forkDesc.dataset.descPt || '';
+                const en = forkDesc.dataset.descEn || '';
+                forkDesc.textContent = (ns.i18n && ns.i18n.current === 'pt-BR' && pt && pt.trim()) ? pt : en;
+
+                // Update toggle button text
+                const isExpanded = card._forkToggle.getAttribute('aria-expanded') === 'true';
+                const toggleText = isExpanded ? ns.i18n.t('fork.collapse') : ns.i18n.t('fork.expand');
+                card._forkToggle.querySelector('span:first-child').textContent = toggleText;
+
+                // Update fork title
+                const forkTitle = card.querySelector('.fork-info-title');
+                if(forkTitle) forkTitle.textContent = ns.i18n.t('fork.info_title');
+
+                // Update fork link text
+                const forkLink = card.querySelector('.fork-info-link span:first-child');
+                if(forkLink) forkLink.textContent = ns.i18n.t('fork.view_original');
             }
         });
     });
