@@ -5,8 +5,16 @@
   * [Getting Started](zapi/getting-started.md)
   * [Initializing](zapi/initializing.md)
   * [Loading Commands & Events](zapi/commands-and-events.md)
-  * [Loading Files](zapi/loading-files.md)
+  * [Creating Custom Commands](zapi/commands-and-subcommands.md)
+  * [Using the Logger](zapi/using-logger.md)
   * [JavaDocs](zapi/javadocs.md)
+  * [Inventories]
+    * [Creating Custom Inventories](zapi/inventories/creating-inventories.md)
+    * [Inventory Configuration Structure](zapi/inventories/inventory-config-structure.md)
+  * [Items]
+    * [Creating Custom Items](zapi/items/creating-custom-items.md)
+  * [Utilities]
+    * [Mathematical Expressions](zapi/utilities/math-expressions.md)
 * [zHomes](zhomes/README.md)
   * [Commands & Permissions](zhomes/commands-and-permissions/README.md)
     * [/zhomes reload \<type>](zhomes/commands-and-permissions/zhomes-reload.md)
