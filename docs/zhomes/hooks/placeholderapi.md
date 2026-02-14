@@ -1,5 +1,5 @@
 ---
-description: List of all plugin's placeholders
+description: List of all plugin's PlaceholderAPI placeholders
 ---
 
 # PlaceholderAPI
@@ -10,18 +10,84 @@ All text between the less-than and greater-than signs (**<>**) is a placeholder/
 
 ## What's PlaceholderAPI?
 
-[**PlaceholderAPI**](https://www.spigotmc.org/resources/6245/) is a famous plugin that allows plugins to communicate via placeholders, every plugin that supports it can have placeholders from other plugins that have it, also it has a built-in system to download placeholders from a platform called [**eCloud**](https://api.extendedclip.com/home/) that have thousands of placeholder expansions that can be used on your server.
+[**PlaceholderAPI**](https://www.spigotmc.org/resources/6245/) is a popular plugin that allows plugins to communicate via placeholders. Every plugin that supports it can use placeholders from other plugins, and it includes a built-in system to download placeholder expansions from [**eCloud**](https://api.extendedclip.com/home/).
 
-## Placeholders
+## Installation
 
-**zHomes** plugin provides [**PlaceholderAPI** ](https://www.spigotmc.org/resources/6245/)placeholders that you can be used in any plugin that supports [**PlaceholderAPI**](https://www.spigotmc.org/resources/6245/)**.**
+The expansion is built into **zHomes** itself. As long as you have PlaceholderAPI installed, the placeholder expansion will automatically register—no need to download anything from eCloud.
 
-The expansion is inside the plugin itself, meaning that you don't have to download it from [**eCloud**](https://api.extendedclip.com/home/), as long as you have PlaceholderAPI installed, the placeholder expansion will be there.
+## Placeholder Syntax
 
-<table><thead><tr><th width="282">Placeholder</th><th width="282">Description</th><th width="185">Output Example</th></tr></thead><tbody><tr><td>%zhomes_version%</td><td>Returns the current version of zhomes</td><td>1.0.0</td></tr><tr><td>%zhomes_hashome_&#x3C;home>%</td><td>Check if the player has a home with name <a data-footnote-ref href="#user-content-fn-1">home</a></td><td>True | False</td></tr><tr><td>%zhomes_set% or %zhomes_numberofhomes%</td><td>Number of homes a player have</td><td>10</td></tr><tr><td>%zhomes_homes%</td><td>All homes a player have</td><td><kbd>home1, home2, home3</kbd></td></tr><tr><td>%zhomes_limit% or %zhomes_max%</td><td>The limit of homes a player can have (Configured in <a href="../files/config.yml.md">config.yml</a>)</td><td>15</td></tr><tr><td>%zhomes_numberofhomes/limit% or %zhomes_set/max%</td><td>Same thing to "%zhomes_numberofhomes%/%zhomes_limit%", but return "Disabled" is limit is not enabled on the plugin</td><td>10/15 | Disabled</td></tr><tr><td>%zhomes_home_&#x3C;number>%</td><td>Returns the name of the home &#x3C;number> of the player (So if he has 3 homes "a", "b" &#x26; "c"), %zhomes_home_1% would return "a" and so on</td><td>home1 | home2</td></tr><tr><td>%zhomes_home_&#x3C;number>_world_%</td><td>Returns the world name of the home &#x3C;number></td><td>world_the_end</td></tr><tr><td>%zhomes_home_&#x3C;number>_&#x3C;x|y|z|pitch|yaw>%</td><td>Returns the parsed coordinate of the home &#x3C;number></td><td>No example</td></tr><tr><td>%zhomes_home_&#x3C;number>_&#x3C;x|y|z|pitch|yaw>_full%</td><td>Returns the full parsed coordinate (All the decimals) of the home &#x3C;number></td><td>No example</td></tr><tr><td>%zhomes_home_&#x3C;number>_&#x3C;x|y|z|pitch|yaw>_&#x3C;decimals>%</td><td>Returns the parsed coordinate of the home &#x3C;number> with the number of decimals in &#x3C;decimals></td><td>No example</td></tr></tbody></table>
+PlaceholderAPI uses the `%identifier_key_args%` format. Arguments are separated by underscores (`_`).
 
-{% hint style="info" %}
-Even if you don't have PlaceholderAPI installed, all of these placeholders will still work inside the plugin & it's configuration files
+### Standard Placeholders
+
+These placeholders use the viewing/command-executing player as context.
+
+| Placeholder | Description | Output Example |
+|------------|-------------|----------------|
+| `%zhomes_version%` | Returns the current version of zHomes | `1.0.0` |
+| `%zhomes_hashome_<home>` | Check if the player has a home with name `<home>` | `True` \| `False` |
+| `%zhomes_set%` | Number of homes the player has | `10` |
+| `%zhomes_numberofhomes%` | Number of homes the player has (alias) | `10` |
+| `%zhomes_homes%` | All homes the player has | `home1, home2, home3` |
+| `%zhomes_limit%` | The limit of homes the player can have | `15` |
+| `%zhomes_max%` | The limit of homes the player can have (alias) | `15` |
+| `%zhomes_set/max%` | Homes set vs limit, or "Disabled" if no limit | `10/15` \| `Disabled` |
+| `%zhomes_numberofhomes/limit%` | Homes set vs limit (alias) | `10/15` \| `Disabled` |
+
+### Home-Specific Placeholders
+
+These placeholders retrieve information about a specific home by index number (1-based).
+
+| Placeholder | Description | Output Example |
+|------------|-------------|----------------|
+| `%zhomes_home_<number>%` | Name of the player's home at index `<number>` | `home1` |
+| `%zhomes_home_<number>_world%` | World name of the home | `world_the_end` |
+| `%zhomes_home_<number>_x%` | X coordinate (rounded) | `123` |
+| `%zhomes_home_<number>_y%` | Y coordinate (rounded) | `64` |
+| `%zhomes_home_<number>_z%` | Z coordinate (rounded) | `-456` |
+| `%zhomes_home_<number>_pitch%` | Pitch (rounded) | `15` |
+| `%zhomes_home_<number>_yaw%` | Yaw (rounded) | `90` |
+| `%zhomes_home_<number>_x_full%` | X coordinate (full precision) | `123.456789` |
+| `%zhomes_home_<number>_y_full%` | Y coordinate (full precision) | `64.000000` |
+| `%zhomes_home_<number>_z_full%` | Z coordinate (full precision) | `-456.123456` |
+| `%zhomes_home_<number>_pitch_full%` | Pitch (full precision) | `15.234567` |
+| `%zhomes_home_<number>_yaw_full%` | Yaw (full precision) | `90.123456` |
+| `%zhomes_home_<number>_x_<decimals>%` | X coordinate with `<decimals>` decimal places | `123.45` |
+| `%zhomes_home_<number>_y_<decimals>%` | Y coordinate with `<decimals>` decimal places | `64.00` |
+| `%zhomes_home_<number>_z_<decimals>%` | Z coordinate with `<decimals>` decimal places | `-456.12` |
+| `%zhomes_home_<number>_pitch_<decimals>%` | Pitch with `<decimals>` decimal places | `15.23` |
+| `%zhomes_home_<number>_yaw_<decimals>%` | Yaw with `<decimals>` decimal places | `90.12` |
+
+### Player-Targeted Placeholders
+
+These placeholders let you query information about a **different player** by specifying their name.
+
+Use the format: `%zhomes_player_<playername>_<key>_<args>%`
+
+| Placeholder | Description | Output Example |
+|------------|-------------|----------------|
+| `%zhomes_player_<name>_hashome_<home>%` | Check if `<name>` has a home called `<home>` | `True` \| `False` |
+| `%zhomes_player_<name>_set%` | Number of homes `<name>` has | `5` |
+| `%zhomes_player_<name>_homes%` | All homes `<name>` has | `spawn, base, farm` |
+| `%zhomes_player_<name>_home_<number>%` | Name of `<name>`'s home at index `<number>` | `spawn` |
+| `%zhomes_player_<name>_home_<number>_world%` | World of `<name>`'s home | `world` |
+| `%zhomes_player_<name>_home_<number>_x%` | X coordinate of `<name>`'s home | `100` |
+
+**Example:**
+```
+%zhomes_player_Steve_home_1%           → Steve's first home name
+%zhomes_player_Alex_set%               → Number of homes Alex has
+%zhomes_player_Notch_home_2_world%     → World of Notch's second home
+```
+
+## Notes
+
+{% hint style="success" %}
+Even without PlaceholderAPI installed, all placeholders still work inside zHomes' own configuration files.
 {% endhint %}
 
-[^1]: <kbd>\<home></kbd> in the placeholder
+{% hint style="info" %}
+For MiniMessage/MiniPlaceholders support, see the [MiniPlaceholders](miniplaceholders.md) page.
+{% endhint %}
