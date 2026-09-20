@@ -12,7 +12,7 @@ zPlugins is an organization of minecraft plugins made by [**yLeoft**](https://gi
 
 ## Website
 
-View our website for information about our projects: [https://zplugins.yleoft.me](https://zplugins.yleoft.me/)
+View our website for information about our projects: [https://plugins.yleoft.me](https://plugins.yleoft.me/)
 
 ## Discord
 
