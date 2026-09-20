@@ -9,17 +9,17 @@ coverY: 0
 # zHomes
 
 {% hint style="warning" %}
-‎This wiki is made to explain the plugin as of version 3.0.1. If any of the config here is missing on your plugin, make sure your plugin is up-to-date, the plugin says when its up-to-date on its starts.
+‎This wiki is made to explain the plugin as of version 3.0.7. If any of the config here is missing on your plugin, make sure your plugin is up-to-date, the plugin says when its up-to-date on its starts.
 {% endhint %}
 
 ## Requirements
 
 * **Java 17 or above**
-* **Version 1.8 - Latest (1.21.11) \[Paper, Purpur, Leaf]**
-* **Version 1.20 - Latest (1.21.11) \[Folia]**
+* **Version 1.19 - Latest (26.3) \[Paper, Purpur, Leaf]**
+* **Version 1.20 - Latest (26.2) \[Folia]**
 
 | Soft Depend                                                                 | Use                                                                                        |
-|-----------------------------------------------------------------------------|--------------------------------------------------------------------------------------------|
+| --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
 | [PlaceholderAPI](https://www.spigotmc.org/resources/placeholderapi.6245/)   | Register custom placeholders for the plugin and parse placeholders                         |
 | [MiniPlaceholders](https://www.spigotmc.org/resources/placeholderapi.6245/) | Register custom minimessage placeholders for the plugin and parse minimessage placeholders |
 | [GriefPrevention](https://modrinth.com/plugin/griefprevention)              | Player's can't use homes on claims unless they have accesstrust                            |

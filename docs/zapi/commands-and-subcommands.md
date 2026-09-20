@@ -2,7 +2,7 @@
 description: >-
   Complete guide to creating custom commands with zAPI's command framework.
   Learn how to create commands, subcommands, and parameters without plugin.yml
-  with automatic tab completion and cooldown support.
+  with automatic tab completion and cooldown suppor
 ---
 
 # Creating Custom Commands
@@ -11,32 +11,32 @@ zAPI provides a powerful command framework that eliminates the need for `plugin.
 
 ## Table of Contents
 
-- [Overview](#overview)
-- [Basic Commands](#basic-commands)
-- [Command Properties](#command-properties)
-- [SubCommands](#subcommands)
-- [Parameters](#parameters)
-- [Tab Completion](#tab-completion)
-- [Cooldown System](#cooldown-system)
-- [Complete Examples](#complete-examples)
+* [Overview](commands-and-subcommands.md#overview)
+* [Basic Commands](commands-and-subcommands.md#basic-commands)
+* [Command Properties](commands-and-subcommands.md#command-properties)
+* [SubCommands](commands-and-subcommands.md#subcommands)
+* [Parameters](commands-and-subcommands.md#parameters)
+* [Tab Completion](commands-and-subcommands.md#tab-completion)
+* [Cooldown System](commands-and-subcommands.md#cooldown-system)
+* [Complete Examples](commands-and-subcommands.md#complete-examples)
 
 ## Overview
 
 The zAPI command system consists of three main interfaces:
 
-- **Command**: Main commands with optional cooldowns
-- **SubCommand**: Sub-commands under main commands
-- **Parameter**: Optional flags/parameters (e.g., `-force`, `-silent`)
+* **Command**: Main commands with optional cooldowns
+* **SubCommand**: Sub-commands under main commands
+* **Parameter**: Optional flags/parameters (e.g., `-force`, `-silent`)
 
 ### Key Features
 
-- ✅ **No plugin.yml needed** - Commands are registered dynamically
-- ✅ **Automatic permission handling** - Built-in permission checks
-- ✅ **Cooldown support** - Per-command cooldowns with bypass permissions
-- ✅ **Parameter system** - Unix-style parameters (e.g., `-flag value`)
-- ✅ **Tab completion** - Automatic subcommand completion
-- ✅ **Message customization** - Override default messages
-- ✅ **Argument validation** - Min/max argument counts
+* ✅ **No plugin.yml needed** - Commands are registered dynamically
+* ✅ **Automatic permission handling** - Built-in permission checks
+* ✅ **Cooldown support** - Per-command cooldowns with bypass permissions
+* ✅ **Parameter system** - Unix-style parameters (e.g., `-flag value`)
+* ✅ **Tab completion** - Automatic subcommand completion
+* ✅ **Message customization** - Override default messages
+* ✅ **Argument validation** - Min/max argument counts
 
 ## Basic Commands
 
@@ -98,26 +98,26 @@ Remember to add empty `commands: {}` and `permissions: {}` sections in your plug
 
 ### Required Methods
 
-| Method | Return Type | Description |
-|--------|-------------|-------------|
-| `name()` | String | The command name |
-| `execute()` | void | Main execution logic |
+| Method      | Return Type | Description          |
+| ----------- | ----------- | -------------------- |
+| `name()`    | String      | The command name     |
+| `execute()` | void        | Main execution logic |
 
 ### Optional Methods
 
-| Method | Return Type | Default | Description |
-|--------|-------------|---------|-------------|
-| `description()` | String | `""` | Command description |
-| `aliases()` | List<String> | `[]` | Command aliases |
-| `permission()` | String | `null` | Required permission |
-| `playerOnly()` | boolean | `false` | Can only be used by players |
-| `minArgs()` | int | `0` | Minimum arguments required |
-| `maxArgs()` | int | `Integer.MAX_VALUE` | Maximum arguments allowed |
-| `usage()` | String | `""` | Usage message |
-| `permissionMessage()` | String | Default | No permission message |
-| `playerOnlyMessage()` | String | Default | Player-only message |
-| `cooldownTime()` | double | `0D` | Cooldown in seconds |
-| `bypassCooldownPermission()` | String | `null` | Permission to bypass cooldown |
+| Method                       | Return Type | Default             | Description                   |
+| ---------------------------- | ----------- | ------------------- | ----------------------------- |
+| `description()`              | String      | `""`                | Command description           |
+| `aliases()`                  | List        | `[]`                | Command aliases               |
+| `permission()`               | String      | `null`              | Required permission           |
+| `playerOnly()`               | boolean     | `false`             | Can only be used by players   |
+| `minArgs()`                  | int         | `0`                 | Minimum arguments required    |
+| `maxArgs()`                  | int         | `Integer.MAX_VALUE` | Maximum arguments allowed     |
+| `usage()`                    | String      | `""`                | Usage message                 |
+| `permissionMessage()`        | String      | Default             | No permission message         |
+| `playerOnlyMessage()`        | String      | Default             | Player-only message           |
+| `cooldownTime()`             | double      | `0D`                | Cooldown in seconds           |
+| `bypassCooldownPermission()` | String      | `null`              | Permission to bypass cooldown |
 
 ### Complete Command Example
 
@@ -288,6 +288,7 @@ public class AdminCommand implements Command {
 ```
 
 Structure:
+
 ```
 /admin                  → AdminCommand
 /admin user             → AdminUserSubCommand
@@ -423,6 +424,7 @@ public class AmountParameter implements Parameter {
 ```
 
 Usage:
+
 ```bash
 /give diamond -amount 64
 /give diamond -a 32
@@ -455,15 +457,15 @@ public void execute(@NotNull CommandSender sender,
 
 ### Parameter Properties
 
-| Method | Return Type | Default | Description |
-|--------|-------------|---------|-------------|
-| `name()` | String | Required | Parameter name |
-| `aliases()` | List<String> | `[]` | Alternative names |
-| `permission()` | String | `null` | Required permission |
-| `minArgs()` | int | `0` | Minimum arguments |
-| `maxArgs()` | int | `Integer.MAX_VALUE` | Maximum arguments |
-| `stopSubCommands()` | boolean | `false` | Prevent subcommand execution |
-| `execute()` | void | Empty | Parameter logic |
+| Method              | Return Type | Default             | Description                  |
+| ------------------- | ----------- | ------------------- | ---------------------------- |
+| `name()`            | String      | Required            | Parameter name               |
+| `aliases()`         | List        | `[]`                | Alternative names            |
+| `permission()`      | String      | `null`              | Required permission          |
+| `minArgs()`         | int         | `0`                 | Minimum arguments            |
+| `maxArgs()`         | int         | `Integer.MAX_VALUE` | Maximum arguments            |
+| `stopSubCommands()` | boolean     | `false`             | Prevent subcommand execution |
+| `execute()`         | void        | Empty               | Parameter logic              |
 
 ### Parameter Features
 
@@ -494,9 +496,10 @@ Players without permission won't see the parameter in tab completion and can't u
 ### Automatic Tab Completion
 
 Tab completion is automatically provided for:
-- Main commands
-- SubCommands
-- Parameters (when typing `-`)
+
+* Main commands
+* SubCommands
+* Parameters (when typing `-`)
 
 ### Custom Tab Completion
 
@@ -558,6 +561,7 @@ public class WorldParameter implements Parameter {
 ```
 
 Usage:
+
 ```
 /tp Steve -world <TAB>  → world, world_nether, world_the_end
 ```
@@ -589,11 +593,13 @@ Players with this permission skip the cooldown.
 ### Cooldown Message
 
 The default cooldown message is:
+
 ```
 You must wait X seconds before using this command again.
 ```
 
 Customize it globally:
+
 ```java
 Messages.setCooldownMessage("<red>Wait %time% seconds!");
 ```
@@ -891,6 +897,7 @@ public class AdminCommand implements Command {
 ```
 
 Usage:
+
 ```
 /admin                      → Shows admin panel
 /admin user                 → User management menu
@@ -1027,6 +1034,7 @@ public class SilentParameter implements Parameter {
 ```
 
 Usage:
+
 ```
 /eco give Steve 100           → Gives $100 to Steve (he sees message)
 /eco give Steve 100 -silent   → Gives $100 to Steve (no message)
@@ -1125,6 +1133,6 @@ public class HelpSubCommand implements SubCommand {
 
 ## See Also
 
-- [Using the Logger](using-logger.md) - Logging in commands
-- [Creating Custom Inventories](creating-inventories.md) - Opening GUIs from commands
-- [Best Practices](best-practices.md) - Command development guidelines
+* [Using the Logger](using-logger.md) - Logging in commands
+* [Creating Custom Inventories](https://github.com/yL3oft/zPlugins/blob/main/docs/zapi/creating-inventories.md) - Opening GUIs from commands
+* [Best Practices](https://github.com/yL3oft/zPlugins/blob/main/docs/zapi/best-practices.md) - Command development guidelines

@@ -41,12 +41,12 @@ description: Get started using the zAPI API.
         &#x3C;url>https://repo.codemc.io/repository/yl3oft/&#x3C;/url>
     &#x3C;/repository>
 &#x3C;/repositories>
-<strong>
-</strong><strong>&#x3C;dependencies>
+
+<strong>&#x3C;dependencies>
 </strong>    &#x3C;dependency>
         &#x3C;groupId>me.yleoft&#x3C;/groupId>
         &#x3C;artifactId>zAPI&#x3C;/artifactId>
-        &#x3C;version>2.0.1&#x3C;/version>
+        &#x3C;version>2.0.6&#x3C;/version>
         &#x3C;scope>compile&#x3C;/scope>
     &#x3C;/dependency>
 &#x3C;/dependencies>
@@ -68,7 +68,7 @@ repositories {
 }
 
 dependencies {
-    implementation("me.yleoft:zAPI:2.0.1")
+    implementation("me.yleoft:zAPI:2.0.6")
 }
 
 shadowJar {
