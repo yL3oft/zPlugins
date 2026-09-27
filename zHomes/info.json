@@ -1,4 +1,5 @@
 {
+  "type": "plugin",
   "name": "zHomes",
   "description": "A powerful home management plugin for spigot/paper servers.",
   "description_pt": "Um poderoso plugin de gerenciamento de 'casas' para servidores spigot/paper.",
@@ -9,9 +10,10 @@
   "spigot": "https://www.spigotmc.org/resources/zhomes.123141/",
   "hangar": "https://hangar.papermc.io/yLeoft/zHomes",
   "bstats-id": 25021,
+  "javadocs": true,
   "modrinth-id": "veAp6a0M",
   "platforms": [
-    {"logos": ["sources/global/spigot.png","sources/global/papermc.svg", "sources/global/purpur.svg"], "versions": ["1.21.x", "1.20.x", "1.19.x", "1.18.x", "1.17.x", "1.16.x", "1.15.x", "1.14.x", "1.13.x", "1.12.x", "1.11.x", "1.10.x", "1.9.x", "1.8.x"]},
-    {"logo": "sources/global/folia.svg", "versions": ["1.21.x", "1.20.x", "1.19.4"] }
+    {"logos": ["sources/global/spigot.png","sources/global/papermc.svg", "sources/global/purpur.svg"], "versions": ["26.3", "26.2", "26.1", "1.21.x", "1.20.x", "1.19.x"]},
+    {"logo": "sources/global/folia.svg", "versions": ["26.3", "26.2", "26.1", "1.21.x", "1.20.x", "1.19.4"] }
   ]
 }

@@ -1,4 +1,5 @@
 {
+  "type": "plugin",
   "name": "Harbor Folia",
   "description": "Adds support for Folia to Harbor.",
   "description_pt": "Adiciona suporte ao Folia para o Harbor.",

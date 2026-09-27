@@ -1,4 +1,5 @@
 {
+  "type": "plugin",
   "name": "InventoryRollbackPlus Folia",
   "description": "Adds support for Folia to InventoryRollbackPlus.",
   "description_pt": "Adiciona suporte ao Folia para o InventoryRollbackPlus.",

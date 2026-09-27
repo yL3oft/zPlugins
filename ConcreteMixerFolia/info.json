@@ -1,4 +1,5 @@
 {
+  "type": "plugin",
   "name": "ConcreteMixer Folia",
   "description": "Adds support for Folia to ConcreteMixer.",
   "description_pt": "Adiciona suporte ao Folia para o ConcreteMixer.",

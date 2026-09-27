@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Page not found: yLeoft</title>
+    <meta name="robots" content="noindex">
+    <!-- GitHub Pages serves this for any missing path, at any depth, so every URL here is absolute. -->
+    <link rel="icon" type="image/png" href="/sources/global/yleoft.png">
+    <script>
+        (function () {
+            var d = document.documentElement, theme, lang;
+            try { theme = localStorage.getItem('theme'); lang = localStorage.getItem('lang'); } catch (e) {}
+            if (theme !== 'light' && theme !== 'dark') theme = window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+            if (lang !== 'en' && lang !== 'pt-BR') lang = /^pt\b/i.test(navigator.language || '') ? 'pt-BR' : 'en';
+            d.setAttribute('data-theme', theme);
+            d.lang = lang;
+        })();
+    </script>
+    <link rel="stylesheet" href="/styles/site.css?v=5">
+    <style>
+        .nf { min-height: calc(100vh - var(--header-h) - 120px); display: grid; place-items: center; padding: 64px 0; }
+        .nf-inner { display: grid; grid-template-columns: auto 1fr; gap: 40px; align-items: center; max-width: 640px; }
+        .nf .hero-head { width: 120px; animation: none; transform: rotate(-8deg); }
+        .nf h1 { font-size: var(--step-3); font-weight: 800; }
+        .nf p { margin-top: 12px; color: var(--muted); font-size: var(--step-1); }
+        .nf .hero-cta { margin-top: 24px; }
+        [lang="pt-BR"] .en, [lang="en"] .pt { display: none; }
+        @media (max-width: 560px) { .nf-inner { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+<header class="site-header">
+    <div class="wrap header-inner">
+        <a class="brand" href="/"><img class="pixel" src="/sources/global/yleoft.png" width="28" height="28" alt=""><span>yLeoft</span></a>
+    </div>
+</header>
+<main class="nf">
+    <div class="wrap nf-inner">
+        <div class="hero-head"><img class="pixel" src="/sources/global/yleoft.png" width="120" height="120" alt=""></div>
+        <div>
+            <h1><span class="en">This page doesn’t exist.</span><span class="pt">Esta página não existe.</span></h1>
+            <p class="en">The link might be old, or the project moved. Everything is listed on the home page.</p>
+            <p class="pt">O link pode estar desatualizado, ou o projeto mudou de lugar. Tudo está listado na página inicial.</p>
+            <div class="hero-cta">
+                <a class="btn btn-primary" href="/"><span class="en">Go to the home page</span><span class="pt">Ir para a página inicial</span></a>
+                <a class="btn" href="https://discord.gg/yCdhVDgn4K" rel="noopener"><span class="en">Ask on Discord</span><span class="pt">Perguntar no Discord</span></a>
+            </div>
+        </div>
+    </div>
+</main>
+<footer class="site-footer" style="padding-top:0">
+    <div class="wrap footer-base" style="margin-top:0">
+        <p>© yLeoft</p>
+        <p class="en">Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.</p>
+        <p class="pt">Não é um produto oficial do Minecraft. Não é aprovado nem associado à Mojang ou à Microsoft.</p>
+    </div>
+</footer>
+</body>
+</html>

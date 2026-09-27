@@ -1,4 +1,5 @@
 {
+  "type": "library",
   "name": "zAPI",
   "description": "zAPI is a library for creating Bukkit/Spigot/Paper plugins.",
   "description_pt": "zAPI é uma biblioteca para criação de plugins Bukkit/Spigot/Paper.",
@@ -8,5 +9,6 @@
   "modrinth": "",
   "spigot": "",
   "hangar": "",
-  "bstats-id": 26888
+  "bstats-id": 26888,
+  "javadocs": true
 }

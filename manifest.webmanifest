@@ -1,0 +1,11 @@
+{
+  "name": "yLeoft: Minecraft plugins and mods",
+  "short_name": "yLeoft",
+  "start_url": "./",
+  "display": "browser",
+  "background_color": "#0f1420",
+  "theme_color": "#0f1420",
+  "icons": [
+    { "src": "sources/global/yleoft.png", "sizes": "300x300", "type": "image/png" }
+  ]
+}

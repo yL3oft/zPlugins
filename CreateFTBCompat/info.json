@@ -1,0 +1,19 @@
+{
+  "type": "mod",
+  "addon": true,
+  "name": "Create: FTB Chunks Compat",
+  "description": "Makes FTB Chunks claims protect against Create's machines: contraptions, drills, saws, Schematicannons, belts and more.",
+  "description_pt": "Faz as claims do FTB Chunks protegerem contra as máquinas do Create: contraptions, brocas, serras, Schematicannons, esteiras e mais.",
+  "url": "https://github.com/yL3oft/CreateFTBCompat",
+  "curseforge": "https://www.curseforge.com/minecraft/mc-mods/create-ftb-chunks-compat",
+  "curseforge-id": 1712268,
+  "modrinth": "https://modrinth.com/mod/createftbcompat",
+  "modrinth-status": "review",
+  "platforms": [
+    {"name": "NeoForge", "versions": ["1.21.1"]}
+  ],
+  "requires": [
+    {"name": "Create", "version": "6.x", "url": "https://modrinth.com/mod/create"},
+    {"name": "FTB Chunks (NeoForge)", "url": "https://www.curseforge.com/minecraft/mc-mods/ftb-chunks-forge"}
+  ]
+}

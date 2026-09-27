@@ -2,10 +2,10 @@
   "zAPI",
   "zHomes",
   "VoicechatWorldGuard",
+  "CreateFTBCompat",
   "InventoryRollbackPlusFolia",
   "HarborFolia",
   "ConcreteMixerFolia",
   "HiddenArmorFolia",
-  "zTPA",
-  "zVips"
+  "zTPA"
 ]
